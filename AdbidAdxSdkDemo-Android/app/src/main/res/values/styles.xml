@@ -1,0 +1,52 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+<!--    Only for GDT-->
+    <style name="DownloadConfirmDialogFullScreen" parent="android:Theme.Dialog">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+
+
+    <style name="style_btn">
+        <item name="android:textSize">@dimen/adbid_title_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/selector_btn</item>
+        <item name="android:background">@drawable/selector_bg_1</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+
+    <style name="style_checkBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/adbid_666666</item>
+        <item name="colorControlActivated">@color/adbid_0042DF</item>
+    </style>
+
+    <style name="CustomButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_custom</item> <!-- 引用上面创建的状态背景 -->
+        <item name="android:textColor">#FFFFFF</item> <!-- 文字颜色 -->
+        <item name="android:textSize">14sp</item> <!-- 文字大小 -->
+    </style>
+
+
+    <style name="BottomDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item> <!-- 背景变暗 -->
+        <!-- 关键步骤：将窗口动画指向我们自定义的动画样式 -->
+        <item name="android:windowAnimationStyle">@style/DialogAnimation.FromBottom</item>
+    </style>
+
+    <!-- 定义具体的窗口进入和退出动画 -->
+    <style name="DialogAnimation.FromBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+</resources>

@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    namespace = "com.yiman.ad.adbid"
+    defaultConfig {
+        applicationId "com.yd.saas.hm.sdk.demo"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 20100013
+        versionName "2.1.0.13"
+    }
+    signingConfigs {
+        debug {
+            storeFile file("./test.jks") // 密钥库文件路径
+            storePassword "123456" // 密钥库密码
+            keyAlias "key0" // 密钥别名
+            keyPassword "123456" // 密钥密码
+            enableV2Signing true
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            // 是否混淆
+            minifyEnabled true
+            // 混淆配置文件的位置
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.debug
+            minifyEnabled true
+            // 混淆配置文件的位置
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    //demo依赖库
+    implementation(libs.androidx.core)
+    api(libs.androidx.appcompat)
+    implementation(libs.glide)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.constraintlayout)
+    implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
+
+    //*********************广告adx接入*******************************************
+
+    //领摩ADX
+    implementation(files("libs/adbid_sdk_2.1.0.13_0427_1411.aar"))
+
+    //微信小程序,各平台都建议接入，有利于提高收益，需提供wxId
+    implementation("com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0")
+
+    // 如果初始化手动传入oaid则无需引用,未手动传入oaid则必须要引用，否则无法请求广告
+    implementation("com.huawei.hms:ads-identifier:3.4.62.300")
+    implementation("com.hihonor.mcs:ads-identifier:1.0.2.301")
+
+}
+
+

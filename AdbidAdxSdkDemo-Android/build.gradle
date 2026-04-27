@@ -1,0 +1,28 @@
+apply from: "config.gradle"
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://www.jitpack.io' }
+        maven { url 'https://developer.huawei.com/repo' }
+        maven { url 'https://developer.hihonor.com/repo' }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.4.1"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://www.jitpack.io' }
+        maven { url 'https://developer.huawei.com/repo' }
+        maven { url 'https://developer.hihonor.com/repo' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
