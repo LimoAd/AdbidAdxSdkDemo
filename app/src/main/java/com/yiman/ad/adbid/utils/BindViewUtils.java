@@ -17,9 +17,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.yd.saas.hm.media.nativeAd.AdbidNativeAd;
-import com.yd.saas.hm.media.nativeAd.AdbidNativeAdView;
-import com.yd.saas.hm.media.nativeAd.AdbidNativeAppInfo;
+import com.adbid.media.nativeAd.AdbidNativeAd;
+import com.adbid.media.nativeAd.AdbidNativeAdView;
+import com.adbid.media.nativeAd.AdbidNativeAppInfo;
 import com.bumptech.glide.Glide;
 import com.yiman.ad.adbid.R;
 

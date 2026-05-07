@@ -6,12 +6,12 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.yd.saas.hm.media.AdbidError;
-import com.yd.saas.hm.sdk.AdbidCustomController;
-import com.yd.saas.hm.sdk.AdbidInitConfig;
-import com.yd.saas.hm.sdk.AdbidLocation;
-import com.yd.saas.hm.sdk.AdbidSdk;
-import com.yd.saas.hm.sdk.AdbidSdkInitListener;
+import com.adbid.media.AdbidError;
+import com.adbid.sdk.AdbidCustomController;
+import com.adbid.sdk.AdbidInitConfig;
+import com.adbid.sdk.AdbidLocation;
+import com.adbid.sdk.AdbidSdk;
+import com.adbid.sdk.AdbidSdkInitListener;
 
 import java.util.Collections;
 import java.util.List;

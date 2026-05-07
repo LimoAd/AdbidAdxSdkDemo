@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.yd.saas.hm.media.AdbidError;
-import com.yd.saas.hm.media.ad.AdbidNativeLoader;
-import com.yd.saas.hm.media.nativeAd.AdbidNativeAd;
-import com.yd.saas.hm.media.nativeOverseas.NativeAdbidLoadListener;
+import com.adbid.media.AdbidError;
+import com.adbid.media.ad.AdbidNativeLoader;
+import com.adbid.media.nativeAd.AdbidNativeAd;
+import com.adbid.media.nativeOverseas.NativeAdbidLoadListener;
 import com.yiman.ad.adbid.AdConfig;
 import com.yiman.ad.adbid.BaseActivity;
 import com.yiman.ad.adbid.R;

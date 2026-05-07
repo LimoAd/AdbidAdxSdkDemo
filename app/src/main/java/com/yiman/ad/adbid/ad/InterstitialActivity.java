@@ -8,10 +8,10 @@ import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.yd.saas.hm.media.AdbidAdInfo;
-import com.yd.saas.hm.media.AdbidError;
-import com.yd.saas.hm.media.AdbidListener;
-import com.yd.saas.hm.media.ad.AdbidInterstitial;
+import com.adbid.media.AdbidAdInfo;
+import com.adbid.media.AdbidError;
+import com.adbid.media.AdbidListener;
+import com.adbid.media.ad.AdbidInterstitial;
 import com.yiman.ad.adbid.AdConfig;
 import com.yiman.ad.adbid.BaseActivity;
 import com.yiman.ad.adbid.R;

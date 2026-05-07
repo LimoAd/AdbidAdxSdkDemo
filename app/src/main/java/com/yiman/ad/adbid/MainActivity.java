@@ -11,18 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import com.yd.saas.hm.media.AdBidLossInfo;
-import com.yd.saas.hm.media.AdBidPlatform;
-import com.yd.saas.hm.media.AdbidAdInfo;
-import com.yd.saas.hm.media.AdbidBannerListener;
-import com.yd.saas.hm.media.AdbidError;
-import com.yd.saas.hm.media.AdbidListener;
-import com.yd.saas.hm.media.AdbidRewardListener;
-import com.yd.saas.hm.media.ad.AdbidAppOpen;
-import com.yd.saas.hm.media.ad.AdbidBannerView;
-import com.yd.saas.hm.media.ad.AdbidInterstitial;
-import com.yd.saas.hm.media.ad.AdbidRewarded;
-import com.yd.saas.hm.utils.ViewUtils;
+import com.adbid.media.AdBidLossInfo;
+import com.adbid.media.AdBidPlatform;
+import com.adbid.media.AdbidAdInfo;
+import com.adbid.media.AdbidBannerListener;
+import com.adbid.media.AdbidError;
+import com.adbid.media.AdbidListener;
+import com.adbid.media.AdbidRewardListener;
+import com.adbid.media.ad.AdbidAppOpen;
+import com.adbid.media.ad.AdbidBannerView;
+import com.adbid.media.ad.AdbidInterstitial;
+import com.adbid.media.ad.AdbidRewarded;
+import com.adbid.utils.ViewUtils;
 import com.yiman.ad.adbid.ad.BannerActivity;
 import com.yiman.ad.adbid.ad.InterstitialActivity;
 import com.yiman.ad.adbid.ad.NativeAdActivity;
@@ -37,9 +37,12 @@ import java.util.Map;
 
 
 public class MainActivity extends BaseActivity {
-    @Nullable AdbidAppOpen appOpenAd;
-    @Nullable AdbidRewarded rewardedAd;
-    @Nullable AdbidInterstitial interstitialAd;
+    @Nullable
+    AdbidAppOpen appOpenAd;
+    @Nullable
+    AdbidRewarded rewardedAd;
+    @Nullable
+    AdbidInterstitial interstitialAd;
     @Nullable private AdbidListener appOpenAdListener;
     @Nullable private AdbidRewardListener adbidRewardListener;
     @Nullable private AdbidListener interListener;
