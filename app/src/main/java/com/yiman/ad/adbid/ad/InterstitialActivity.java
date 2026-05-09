@@ -1,10 +1,8 @@
 package com.yiman.ad.adbid.ad;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
-import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -13,13 +11,12 @@ import com.adbid.media.AdbidError;
 import com.adbid.media.AdbidListener;
 import com.adbid.media.ad.AdbidInterstitial;
 import com.yiman.ad.adbid.AdConfig;
-import com.yiman.ad.adbid.BaseActivity;
+import com.yiman.ad.BaseActivity;
 import com.yiman.ad.adbid.R;
 import com.yiman.ad.adbid.view.TitleBar;
 
 public class InterstitialActivity extends BaseActivity {
-    @Nullable
-    AdbidInterstitial interstitialAd;
+    @Nullable AdbidInterstitial interstitialAd;
 
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -8,17 +8,19 @@ android {
     namespace = "com.yiman.ad.adbid"
     defaultConfig {
         applicationId "com.adbid.sdk.demo"
+        //applicationId "com.chinaath.szxd"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode 20100014
-        versionName "2.1.0.14"
+        versionCode 20100011
+        versionName "2.1.0.11"
     }
+
     signingConfigs {
         debug {
-            storeFile file("./test.jks") // 密钥库文件路径
+            storeFile file("./key/ydyFarm.keystore") // 密钥库文件路径
             storePassword "123456" // 密钥库密码
-            keyAlias "key0" // 密钥别名
-            keyPassword "123456" // 密钥密码
+            keyAlias "aprilIdiom" // 密钥别名
+            keyPassword "123456" // 0密钥密码
             enableV2Signing true
         }
     }
@@ -27,7 +29,7 @@ android {
         debug {
             signingConfig signingConfigs.debug
             // 是否混淆
-            minifyEnabled true
+            minifyEnabled false
             // 混淆配置文件的位置
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -52,26 +54,28 @@ repositories {
 }
 
 dependencies {
-    //demo依赖库
+
     implementation(libs.androidx.core)
-    api(libs.androidx.appcompat)
     implementation(libs.glide)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.play.services.ads.identifier)
+    implementation(libs.play.services.location)
+    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
 
-    //*********************广告adx接入*******************************************
-
-    //领摩ADX
+    //领摩核心库
     implementation(files("libs/adbid_sdk_2.1.0.14_0509_1612.aar"))
 
-    //微信小程序,各平台都建议接入，有利于提高收益，需提供wxId
+    //微信小程序,建议接入，有利于提高收益
     implementation("com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0")
 
-    // 如果初始化手动传入oaid则无需引用,未手动传入oaid则必须要引用，否则无法请求广告
+    // 选择性接入，如果手动向sdk传入OAID,则无需接入，如果不传入，必须添加此依赖，否则影响收益
     implementation("com.huawei.hms:ads-identifier:3.4.62.300")
     implementation("com.hihonor.mcs:ads-identifier:1.0.2.301")
 
+
+
+
+
 }
-
-
