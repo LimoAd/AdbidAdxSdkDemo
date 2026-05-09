@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">AdBidDemo</string>
+    <string name="app_name">LmAdxDemo</string>
 
-    <string name="adbid_sdk_demo">Taku Sdk Demo</string>
+    <string name="limo_adx_demo">Taku Sdk Demo</string>
 
     <string name="adbid_title_rewarded_video">Rewarded Video</string>
     <string name="adbid_title_interstitial">Interstitial</string>
