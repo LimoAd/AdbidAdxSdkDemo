@@ -21,4 +21,4 @@
 领摩adx
 
 ### 接入文档：
-https://docs.qq.com/aio/p/sclx3ejo3guwfau?p=h2PJLD2VPKU80zYxfTsIDL
+https://docs.qq.com/aio/p/sclx3ejo3guwfau?p=6FFbVrgFs1FZL6IHiSraJP
