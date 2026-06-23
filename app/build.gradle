@@ -75,7 +75,8 @@ dependencies {
     //选择性接入(强烈建议)：微信小程序,有利于提高收益
     implementation("com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0")
 
-    // 选择性接入(强烈建议)：如果手动向sdk传入OAID,则无需接入，如果不传入，必须添加此依赖，否则影响收益
+    // 1.必须接入：允许sdk获取oaid,需引入，否则影响收益
+    // 2.无需接入：如果禁用sdk获取oaid,必须手动向sdk传入OAID,此时无需接入
     implementation("com.huawei.hms:ads-identifier:3.4.62.300")
     implementation("com.hihonor.mcs:ads-identifier:1.0.2.301")
 
@@ -84,3 +85,4 @@ dependencies {
 
 
 }
+
