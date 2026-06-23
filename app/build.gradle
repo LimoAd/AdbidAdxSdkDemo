@@ -10,8 +10,8 @@ android {
         applicationId "com.adbid.adx.sdk.demo"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode 20100014
-        versionName "2.1.0.14"
+        versionCode 20100019
+        versionName "2.1.0.19"
     }
 
     signingConfigs {
@@ -63,13 +63,19 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
 
-    //领摩核心库
-    implementation(files("libs/adbid_sdk_2.1.0.14_0509_1612.aar"))
+    //必选：领摩加载库
+    implementation(files("libs/adbid_sdk_2.1.0.19_0623_1543.aar"))
 
-    //微信小程序,建议接入，有利于提高收益
+    //必选：领摩核心库
+    implementation(files("libs/adbid_limo_1.0.1_0623_1620.aar"))
+    implementation(files("libs/adbid_lmx_1.0.0_0616_2311.aar"))
+    //必选：领摩基础库
+    implementation(files("libs/adbid_common_1.0.0_0616_2248.aar"))
+
+    //选择性接入(强烈建议)：微信小程序,有利于提高收益
     implementation("com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0")
 
-    // 选择性接入，如果手动向sdk传入OAID,则无需接入，如果不传入，必须添加此依赖，否则影响收益
+    // 选择性接入(强烈建议)：如果手动向sdk传入OAID,则无需接入，如果不传入，必须添加此依赖，否则影响收益
     implementation("com.huawei.hms:ads-identifier:3.4.62.300")
     implementation("com.hihonor.mcs:ads-identifier:1.0.2.301")
 
