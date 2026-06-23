@@ -25,6 +25,9 @@ import java.util.Map;
 
 
     static {
+        configMap.put("10001",
+                new AdConfig("10001", "100010102000001", "100010103000001",
+                        "100010105000001", "100010101000001", "100010104000001"));
         configMap.put("10005", new AdConfig("10005", "MTc1MzkzMDgyNTk4MA==", "MTc1MzkzMTExNjA4NA==",
                 "MTc1ODcwMDkyNjk1NA==", "MTc1MzkzMDY5NDkyOA==", "MTc1ODc5NjM5NTY4OA=="));
     }
