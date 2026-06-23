@@ -30,13 +30,11 @@ android {
             // 是否混淆
             minifyEnabled false
             // 混淆配置文件的位置
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             signingConfig signingConfigs.debug
             minifyEnabled true
             // 混淆配置文件的位置
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
