@@ -10,8 +10,6 @@ public final class AppIdStore {
     private AppIdStore() {
     }
 
-    @NonNull public static String getSelectedAppId(boolean isAdxMode) {
-        return "10005";
-    }
+
 
 }

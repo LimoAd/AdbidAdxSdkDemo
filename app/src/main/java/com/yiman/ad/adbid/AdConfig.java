@@ -20,36 +20,29 @@ import java.util.Map;
     private final String splashUnitId;
     private final String bannerUnitId;
 
-    public static final String DEFAULT_APP_ID = "10005";
     private static final Map<String, AdConfig> configMap = new HashMap<>();
 
 
     static {
-        configMap.put("10001",
-                new AdConfig("10001", "100010102000001", "100010103000001",
-                        "100010105000001", "100010101000001", "100010104000001"));
         configMap.put("10005", new AdConfig("10005", "MTc1MzkzMDgyNTk4MA==", "MTc1MzkzMTExNjA4NA==",
                 "MTc1ODcwMDkyNjk1NA==", "MTc1MzkzMDY5NDkyOA==", "MTc1ODc5NjM5NTY4OA=="));
+        configMap.put("10028",
+                new AdConfig("10028", "", "", "",
+                        "MTc3OTg1ODEyOTc5Nw==", ""));
     }
 
     public static IAdLoad getAdLoad(@NonNull Context context) {
         return new AdbidAdLoad(context);
     }
 
-    @NonNull public static String resolveAppId(String appId) {
-        if (appId != null && configMap.containsKey(appId)) {
-            return appId;
-        }
-        return DEFAULT_APP_ID;
-    }
+
 
     @NonNull public static List<String> getAvailableAppIds() {
         return new ArrayList<>(configMap.keySet());
     }
 
     public static AdConfig getAdConfig() {
-        String selected = AppIdStore.getSelectedAppId(false);
-        return configMap.get(resolveAppId(selected));
+        return configMap.get("10005");
     }
 
     public AdConfig(String appId, String interUnitId, String nativeUnitId, String rewardUnitId,

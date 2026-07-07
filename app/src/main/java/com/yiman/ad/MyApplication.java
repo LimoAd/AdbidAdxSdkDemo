@@ -12,6 +12,7 @@ import com.adbid.sdk.AdbidInitConfig;
 import com.adbid.sdk.AdbidLocation;
 import com.adbid.sdk.AdbidSdk;
 import com.adbid.sdk.AdbidSdkInitListener;
+import com.yiman.ad.adbid.AdConfig;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +26,7 @@ public class MyApplication extends Application {
         myApplication = this;
         AdbidSdk.getInstance(this).setDebugMode(true);
         //广告sdk初始化
-        AdbidInitConfig config = AdbidInitConfig.builder(AppIdStore.getSelectedAppId(false))
+        AdbidInitConfig config = AdbidInitConfig.builder(AdConfig.getAdConfig().getAppId())
                 //设置App渠道
                 .setAppChannel("xiaomi")
                 //设置App版本
