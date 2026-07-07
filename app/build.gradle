@@ -7,7 +7,7 @@ android {
     buildToolsVersion rootProject.ext.android.buildToolsVersion
     namespace = "com.yiman.ad.adbid"
     defaultConfig {
-        applicationId "com.adbid.adx.sdk.demo"
+        applicationId "com.limo.adx"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 20100019
