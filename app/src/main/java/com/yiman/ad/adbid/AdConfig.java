@@ -24,8 +24,6 @@ import java.util.Map;
 
 
     static {
-        configMap.put("10005", new AdConfig("10005", "MTc1MzkzMDgyNTk4MA==", "MTc1MzkzMTExNjA4NA==",
-                "MTc1ODcwMDkyNjk1NA==", "MTc1MzkzMDY5NDkyOA==", "MTc1ODc5NjM5NTY4OA=="));
         configMap.put("10028",
                 new AdConfig("10028", "", "", "",
                         "MTc3OTg1ODEyOTc5Nw==", ""));
@@ -42,7 +40,7 @@ import java.util.Map;
     }
 
     public static AdConfig getAdConfig() {
-        return configMap.get("10005");
+        return configMap.get("10028");
     }
 
     public AdConfig(String appId, String interUnitId, String nativeUnitId, String rewardUnitId,

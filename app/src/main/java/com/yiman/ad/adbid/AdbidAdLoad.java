@@ -18,6 +18,7 @@ import com.adbid.media.AdbidBannerListener;
 import com.adbid.media.AdbidError;
 import com.adbid.media.AdbidListener;
 import com.adbid.media.AdbidRewardListener;
+import com.adbid.media.Logger;
 import com.adbid.media.ad.AdbidAppOpen;
 import com.adbid.media.ad.AdbidBannerView;
 import com.adbid.media.ad.AdbidInterstitial;
@@ -61,8 +62,9 @@ public class AdbidAdLoad extends IAdLoad {
             public void onSuccess(String result) {
                 if (!StringUtils.isEmpty(result)) {
                     token = result;
+                    runnable.run();
                 }
-                runnable.run();
+
             }
         });
     }
@@ -71,6 +73,7 @@ public class AdbidAdLoad extends IAdLoad {
     @Override
     public void loadSplash() {
         String unitId=AdConfig.getAdConfig().getSplashUnitId();
+        Logger.i("loadSplash","start");
         requestS2SBiddingToken(unitId,new Runnable() {
             @Override public void run() {
                 AdbidListener appOpenAdListener = new AdbidListener() {
