@@ -14,25 +14,14 @@ android {
         versionName "2.1.0.19"
     }
 
-    signingConfigs {
-        debug {
-            storeFile file("./key/ydyFarm.keystore") // 密钥库文件路径
-            storePassword "123456" // 密钥库密码
-            keyAlias "aprilIdiom" // 密钥别名
-            keyPassword "123456" // 0密钥密码
-            enableV2Signing true
-        }
-    }
+
 
     buildTypes {
         debug {
-            signingConfig signingConfigs.debug
-            // 是否混淆
             minifyEnabled false
             // 混淆配置文件的位置
         }
         release {
-            signingConfig signingConfigs.debug
             minifyEnabled true
             // 混淆配置文件的位置
         }
@@ -64,9 +53,8 @@ dependencies {
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
 
 
-
     //必选：领摩加载库
-    implementation(files("libs/adbid_sdk_2.1.0.21_0729_1602.aar"))
+    implementation(files("libs/adbid_sdk_2.1.0.21_0729_1640.aar"))
 
     //选择性接入(强烈建议)：微信小程序,有利于提高收益
     implementation("com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0")
