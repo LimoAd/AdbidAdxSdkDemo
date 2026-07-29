@@ -4,16 +4,17 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.adbid.media.AdbidError;
-import com.adbid.media.ad.AdbidNativeLoader;
-import com.adbid.media.nativeAd.AdbidNativeAd;
-import com.adbid.media.nativeOverseas.NativeAdbidLoadListener;
+import com.ad.mate.hm.media.AdbidError;
+import com.ad.mate.hm.media.ad.AdbidNativeLoader;
+import com.ad.mate.hm.media.nativeAd.AdbidNativeAd;
+import com.ad.mate.hm.media.nativeOverseas.NativeAdbidLoadListener;
 import com.yiman.ad.adbid.AdConfig;
 import com.yiman.ad.BaseActivity;
 import com.yiman.ad.adbid.R;
@@ -145,16 +146,19 @@ public class NativeAdRecycleActivity extends BaseActivity implements NativeViewA
                                     tempNativeBean.pos = adapter.getItemCount() - 2;
                                 }
                                 adapter.notifyDataSetChanged();
+                                printMsg("信息流加载成功");
                             }
 
                             @Override public void onNativeAdLoadFail(@NonNull AdbidError adError) {
-
+                                printMsg("信息流加载失败: " + adError.getMessage());
                             }
                         });
-        nativeLoader.loadAd();
+        String token = getIntent().getStringExtra("s2s_token");
+        nativeLoader.loadAd(token);
     }
 
     @Override public void printMsg(String s) {
         Log.i("AdbidSdkDemo", s);
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 }

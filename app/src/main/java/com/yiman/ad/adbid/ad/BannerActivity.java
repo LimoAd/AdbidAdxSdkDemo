@@ -7,10 +7,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.adbid.media.AdbidAdInfo;
-import com.adbid.media.AdbidBannerListener;
-import com.adbid.media.AdbidError;
-import com.adbid.media.ad.AdbidBannerView;
+import com.ad.mate.hm.media.AdbidAdInfo;
+import com.ad.mate.hm.media.AdbidBannerListener;
+import com.ad.mate.hm.media.AdbidError;
+import com.ad.mate.hm.media.ad.AdbidBannerView;
 import com.yiman.ad.adbid.AdConfig;
 import com.yiman.ad.BaseActivity;
 import com.yiman.ad.adbid.R;
