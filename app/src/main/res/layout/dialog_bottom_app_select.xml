@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.adbid.adx.view.round.LMRoundLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:lm_backgroundColor="@color/app_surface"
-    app:lm_cornerRadius="24dp">
+    android:background="@drawable/bg_dialog_bottom"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,4 +59,4 @@
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="18dp"
         android:text="@string/app_platform_dialog_confirm" />
-</com.adbid.adx.view.round.LMRoundLinearLayout>
+</LinearLayout>

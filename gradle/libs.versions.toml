@@ -17,6 +17,7 @@ recyclerviewVersion = "1.2.1"
 unityAds = "4.16.0"
 viewpager = "1.1.0"
 vungleAds = "7.5.0"
+viewpager2 = "1.0.0"
 
 [libraries]
 androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
@@ -28,6 +29,7 @@ androidx-viewpager = { module = "androidx.viewpager:viewpager", version.ref = "v
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 inmobi-ads-kotlin = { module = "com.inmobi.monetization:inmobi-ads-kotlin", version.ref = "inmobiAdsKotlin" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 mbridge_android_sdk = { module = "com.mbridge.msdk.oversea:mbridge_android_sdk", version.ref = "mbridge_android_sdk" }
 pag-sdk = { module = "com.pangle.global:pag-sdk", version.ref = "pagSdk" }
 play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }

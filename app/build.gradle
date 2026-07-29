@@ -57,12 +57,14 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.play.services.ads.identifier)
     implementation(libs.play.services.location)
+    implementation(libs.androidx.viewpager2)
     implementation(libs.androidx.appcompat)
+    implementation 'com.google.code.gson:gson:2.8.9'
     implementation(libs.androidx.constraintlayout)
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
 
     //必选：领摩加载库
-    implementation(files("libs/adbid_sdk_2.1.0.19_0623_1543.aar"))
+    implementation(files("libs/adbid_sdk_2.1.0.21_0727_2052.aar"))
 
     //必选：领摩核心库
     implementation(files("libs/adbid_limo_1.0.1_0623_1620.aar"))

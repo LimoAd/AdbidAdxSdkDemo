@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -145,16 +146,19 @@ public class NativeAdRecycleActivity extends BaseActivity implements NativeViewA
                                     tempNativeBean.pos = adapter.getItemCount() - 2;
                                 }
                                 adapter.notifyDataSetChanged();
+                                printMsg("信息流加载成功");
                             }
 
                             @Override public void onNativeAdLoadFail(@NonNull AdbidError adError) {
-
+                                printMsg("信息流加载失败: " + adError.getMessage());
                             }
                         });
-        nativeLoader.loadAd();
+        String token = getIntent().getStringExtra("s2s_token");
+        nativeLoader.loadAd(token);
     }
 
     @Override public void printMsg(String s) {
         Log.i("AdbidSdkDemo", s);
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 }
