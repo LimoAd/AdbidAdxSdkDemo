@@ -9,7 +9,6 @@ import com.yiman.ad.adbid.R;
 import com.yiman.ad.adbid.view.TitleBar;
 import com.yiman.ad.log.MainLogConsole;
 import com.yiman.ad.log.ToastHub;
-import com.yiman.ad.utils.PreferencesUtils;
 
 public class MainActivity extends BaseActivity {
 
@@ -40,10 +39,6 @@ public class MainActivity extends BaseActivity {
         ensureAdLoadSingleton();
     }
 
-    private boolean isAdxMode() {
-        return PreferencesUtils.getBoolean("is_check_adx", false);
-    }
-
     private IAdLoad ensureAdLoadSingleton() {
         return panelController.getCurrentAdLoad();
     }
@@ -70,46 +65,6 @@ public class MainActivity extends BaseActivity {
             getLogConsole().info("广告初始化开始...");
             adLoad().init();
         });
-        findViewById(R.id.btn_native_load).setOnClickListener(view -> {
-            getLogConsole().info("信息流广告开始加载单条自渲染...");
-            adLoad().loadNative();
-        });
-        findViewById(R.id.btn_native_load_list).setOnClickListener(view -> {
-            getLogConsole().info("信息流广告开始加载列表自渲染...");
-            adLoad().loadRecycleNative();
-        });
-        findViewById(R.id.btn_native_load_draw).setOnClickListener(view -> {
-            getLogConsole().info("信息流广告开始加载 Draw 自渲染...");
-            adLoad().loadNativeDraw();
-        });
-
-        findViewById(R.id.btn_banner_load).setOnClickListener(view -> {
-            getLogConsole().info("横幅广告开始加载并展示...");
-            adLoad().showBanner(findViewById(R.id.frame_ad_banner));
-        });
-
-        findViewById(R.id.btn_reward_Load).setOnClickListener(view -> {
-            getLogConsole().info("激励广告开始加载...");
-            adLoad().loadReward();
-        });
-        findViewById(R.id.btn_reward_ready).setOnClickListener(
-                view -> showReadyToast("激励广告", adLoad().isRewardReady()));
-        findViewById(R.id.btn_reward_show).setOnClickListener(view -> {
-            getLogConsole().info("激励广告开始展示...");
-            adLoad().showReward();
-        });
-
-        findViewById(R.id.btn_inter_load).setOnClickListener(view -> {
-            getLogConsole().info("插屏广告开始加载...");
-            adLoad().loadInterstitial();
-        });
-        findViewById(R.id.btn_inter_ready).setOnClickListener(
-                view -> showReadyToast("插屏广告", adLoad().isInterstitialReady()));
-        findViewById(R.id.btn_inter_show).setOnClickListener(view -> {
-            getLogConsole().info("插屏广告开始展示...");
-            adLoad().showInterstitial();
-        });
-
         findViewById(R.id.btn_app_open_load).setOnClickListener(view -> {
             getLogConsole().info("开屏广告开始加载...");
             adLoad().loadSplash();

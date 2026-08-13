@@ -2,9 +2,9 @@ package com.yiman.ad;
 
 import android.text.TextUtils;
 
-import com.adbid.media.Logger;
-import com.adbid.sdk.AdbidSdk;
-import com.adbid.sdk.AdbidSdkInfoCallback;
+import cn.vlion.ad.inland.vl48.media.VL48Logger;
+import cn.vlion.ad.inland.vl48.sdk.AdbidSdk;
+import cn.vlion.ad.inland.vl48.sdk.AdbidSdkInfoCallback;
 import com.yiman.ad.adbid.AdConfig;
 
 import org.json.JSONObject;
@@ -63,11 +63,11 @@ public class DemoRequestUtils {
                 AdbidSdk.getInstance(MyApplication.myApplication.getApplicationContext())
                         .getSdkInfo(posId, new AdbidSdkInfoCallback() {
                             @Override public void onInfoCallback(String info) {
-                                Logger.d(TAG,"onInfoCallback time " +
+                                VL48Logger.d(TAG,"onInfoCallback time " +
                                         (System.currentTimeMillis() - time));
                                 try {
                                     if (info == null) {
-                                        Logger.e(TAG,"sdkInfo is null");
+                                        VL48Logger.e(TAG,"sdkInfo is null");
                                         notifyFailure(callBack);
                                         return;
                                     }
@@ -76,7 +76,7 @@ public class DemoRequestUtils {
                                             .replace("APP_ID", AdConfig.getAdConfig().getAppId())
                                             .replace("SDK_VERSION",AdbidSdk.VERSION)
                                             .replace("OA_ID","f89b6f636f4ed58f");
-                                    Logger.d(TAG,"postData = " + postData);
+                                    VL48Logger.d(TAG,"postData = " + postData);
                                     byte[] postDataBytes =
                                             postData.getBytes(StandardCharsets.UTF_8);
 
@@ -86,14 +86,14 @@ public class DemoRequestUtils {
                                     out.close();
                                     handleResponse(getStringContent(connection), callBack);
                                 } catch (IOException e) {
-                                    Logger.d(TAG,"请求 token 失败： " + e.getMessage());
+                                    VL48Logger.d(TAG,"请求 token 失败： " + e.getMessage());
                                     notifyFailure(callBack);
                                 }
                             }
                         });
 
             } catch (IOException e) {
-                Logger.d(TAG,"请求 token 失败： " + e.getMessage());
+                VL48Logger.d(TAG,"请求 token 失败： " + e.getMessage());
                 notifyFailure(callBack);
             }
         });
@@ -116,17 +116,17 @@ public class DemoRequestUtils {
             String token = jsonObject.optString("token");
 
             if (TextUtils.isEmpty(token)) {
-                Logger.e(TAG,"回包中无 token");
+                VL48Logger.e(TAG,"回包中无 token");
                 notifyFailure(callBack);
             } else {
-                Logger.i(TAG,"请求 token 成功");
+                VL48Logger.i(TAG,"请求 token 成功");
                 if (callBack != null) {
-                    Logger.i(TAG,"requestBiddingToken: " + token);
+                    VL48Logger.i(TAG,"requestBiddingToken: " + token);
                     callBack.onSuccess(token);
                 }
             }
         } catch (Exception e) {
-            Logger.e(TAG,"requestBiddingToken error "+ e.getMessage());
+            VL48Logger.e(TAG,"requestBiddingToken error "+ e.getMessage());
             notifyFailure(callBack);
         }
     }
@@ -142,7 +142,7 @@ public class DemoRequestUtils {
 
         int responseCode = connection.getResponseCode();
 
-        Logger.d(TAG, "responseCode = " + responseCode);
+        VL48Logger.d(TAG, "responseCode = " + responseCode);
 
         InputStream in;
 
@@ -155,7 +155,7 @@ public class DemoRequestUtils {
 
             in = connection.getErrorStream();
 
-            Logger.e(TAG, "error response message = " + connection.getResponseMessage());
+            VL48Logger.e(TAG, "error response message = " + connection.getResponseMessage());
         }
 
         if (in == null) {

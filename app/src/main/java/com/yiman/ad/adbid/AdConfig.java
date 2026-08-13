@@ -16,14 +16,9 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class AdConfig {
     private String appId;
-    private final String interUnitId;
-    private final String nativeUnitId;
-    private final String rewardUnitId;
     private final String splashUnitId;
-    private final String bannerUnitId;
-    private String nativeUnitId2;
 
-    public static final String DEFAULT_APP_ID = "10005";
+    public static final String DEFAULT_APP_ID = "10001";
     private static final Map<String, AdConfig> configMap = new HashMap<>();
 
     private static boolean s2sBiddingEnabled = false;
@@ -39,9 +34,9 @@ public class AdConfig {
 
     static {
 
+        configMap.put("10001", new AdConfig("10001", "MTc1MjcyMDQyMjgwOQ=="));
 
-        configMap.put("10005", new AdConfig("10005", "MTc1MzkzMDgyNTk4MA==", "MTc1MzkzMTExNjA4NA==",
-                "MTc1ODcwMDkyNjk1NA==", "MTc1MzkzMDY5NDkyOA==", "MTc1ODc5NjM5NTY4OA=="));
+        configMap.put("10005", new AdConfig("10005", "MTc1MzkzMDY5NDkyOA=="));
          }
 
     public static IAdLoad getAdLoad(@NonNull Context context, @NonNull MainLogConsole logConsole) {
@@ -56,10 +51,6 @@ public class AdConfig {
         return DEFAULT_APP_ID;
     }
 
-
-    public String getNativeUnitId2() {
-        return nativeUnitId2;
-    }
 
     @NonNull
     public static String resolveAppId(String appId) {
@@ -76,25 +67,9 @@ public class AdConfig {
         return configMap.get(resolveSelectionKey(selected));
     }
 
-    public AdConfig(String appId, String interUnitId, String nativeUnitId, String rewardUnitId,
-                    String splashUnitId, String bannerUnitId) {
+    public AdConfig(String appId, String splashUnitId) {
         this.appId = appId;
-        this.interUnitId = interUnitId;
-        this.nativeUnitId = nativeUnitId;
-        this.rewardUnitId = rewardUnitId;
         this.splashUnitId = splashUnitId;
-        this.bannerUnitId = bannerUnitId;
-    }
-
-    public AdConfig(String appId, String interUnitId, String nativeUnitId, String rewardUnitId,
-                    String splashUnitId, String bannerUnitId, String nativeUnitId2) {
-        this.appId = appId;
-        this.interUnitId = interUnitId;
-        this.nativeUnitId = nativeUnitId;
-        this.nativeUnitId2 = nativeUnitId2;
-        this.rewardUnitId = rewardUnitId;
-        this.splashUnitId = splashUnitId;
-        this.bannerUnitId = bannerUnitId;
     }
 
     public String getAppId() {
@@ -106,37 +81,14 @@ public class AdConfig {
     }
 
 
-    public String getInterUnitId() {
-        return interUnitId;
-    }
-
-
-    public String getNativeUnitId() {
-        return nativeUnitId;
-    }
-
-
-    public String getRewardUnitId() {
-        return rewardUnitId;
-    }
-
-
     public String getSplashUnitId() {
         return splashUnitId;
-    }
-
-
-    public String getBannerUnitId() {
-        return bannerUnitId;
     }
 
 
     @NonNull
     @Override
     public String toString() {
-        return "AdConfig{" + "appId='" + appId + '\'' + ", interUnitId='" + interUnitId + '\'' +
-                ", nativeUnitId='" + nativeUnitId + '\'' + ", rewardUnitId='" + rewardUnitId +
-                '\'' + ", splashUnitId='" + splashUnitId + '\'' + ", bannerUnitId='" +
-                bannerUnitId + '\'' + '}';
+        return "AdConfig{" + "appId='" + appId + '\'' + ", splashUnitId='" + splashUnitId + '\'' + '}';
     }
 }

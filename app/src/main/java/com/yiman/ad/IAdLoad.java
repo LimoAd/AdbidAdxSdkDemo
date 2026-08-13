@@ -38,25 +38,5 @@ public abstract class IAdLoad {
 
     public abstract void showSplash(@NonNull ViewGroup viewGroup);
 
-    public abstract void loadInterstitial();
-
-    public abstract boolean isInterstitialReady();
-
-    public abstract void showInterstitial();
-
-    public abstract void loadReward();
-
-    public abstract boolean isRewardReady();
-
-    public abstract void showReward();
-
-    public abstract void showBanner(@NonNull ViewGroup viewGroup);
-
     public abstract void destroy();
-
-    public abstract void loadNative();
-
-    public abstract void loadRecycleNative();
-
-    public abstract void loadNativeDraw();
 }

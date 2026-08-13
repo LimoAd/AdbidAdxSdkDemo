@@ -6,17 +6,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.adbid.media.AdbidAdInfo;
-import com.adbid.media.AdbidError;
-import com.adbid.media.AdbidListener;
-import com.adbid.media.ad.AdbidAppOpen;
+import cn.vlion.ad.inland.vl48.media.VL48AdbidAdInfo;
+import cn.vlion.ad.inland.vl48.media.VL48AdbidError;
+import cn.vlion.ad.inland.vl48.media.VL48AdbidListener;
+import cn.vlion.ad.inland.vl48.media.ad.VL48AdbidAppOpen;
 import com.yiman.ad.adbid.AdConfig;
 import com.yiman.ad.BaseActivity;
 import com.yiman.ad.adbid.R;
 import com.yiman.ad.adbid.view.TitleBar;
 
 public class SplashActivity extends BaseActivity {
-    private AdbidAppOpen appOpenAd;
+    private VL48AdbidAppOpen appOpenAd;
 
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,11 +25,11 @@ public class SplashActivity extends BaseActivity {
         titleBar.setTitle(R.string.app_spalsh_name);
         titleBar.setListener(view -> finish());
         //创建开屏广告实例
-        appOpenAd = new AdbidAppOpen(AdConfig.getAdConfig().getSplashUnitId());
+        appOpenAd = new VL48AdbidAppOpen(AdConfig.getAdConfig().getSplashUnitId());
 
         //设置广告监听
-        appOpenAd.setAdListener(new AdbidListener() {
-            @Override public void onAdLoad(@NonNull AdbidAdInfo adInfo) {
+        appOpenAd.setAdListener(new VL48AdbidListener() {
+            @Override public void onAdLoad(@NonNull VL48AdbidAdInfo adInfo) {
                 //获取广告价格，单位分
                 double ecpm = adInfo.getPrice();
                 log( "开屏广告加载成功，ecpm: " + ecpm);
@@ -40,25 +40,25 @@ public class SplashActivity extends BaseActivity {
             }
 
             @Override
-            public void onAdLoadFail(@Nullable String adUnitId, @NonNull AdbidError error) {
+            public void onAdLoadFail(@Nullable String adUnitId, @NonNull VL48AdbidError error) {
                 log( "开屏广告加载失败");
             }
 
-            @Override public void onAdDisplayed(@NonNull AdbidAdInfo adInfo) {
+            @Override public void onAdDisplayed(@NonNull VL48AdbidAdInfo adInfo) {
                 log( "开屏广告展示");
 
             }
 
             @Override
-            public void onAdDisplayedFailed(@Nullable AdbidAdInfo adInfo,@NonNull AdbidError error) {
+            public void onAdDisplayedFailed(@Nullable VL48AdbidAdInfo adInfo,@NonNull VL48AdbidError error) {
                 log( "开屏广告失败：" + error.getMessage());
             }
 
-            @Override public void onAdHidden(@NonNull AdbidAdInfo adInfo) {
+            @Override public void onAdHidden(@NonNull VL48AdbidAdInfo adInfo) {
                 log( "开屏广告关闭");
             }
 
-            @Override public void onAdClicked(@NonNull AdbidAdInfo adInfo) {
+            @Override public void onAdClicked(@NonNull VL48AdbidAdInfo adInfo) {
                 log( "开屏广告触发点击");
             }
         });

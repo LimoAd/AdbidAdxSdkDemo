@@ -8,7 +8,6 @@ import com.yiman.ad.utils.PreferencesUtils;
 public final class AppIdStore {
 
     private static final String KEY_APP_ID_ADBID = "app_id_adbid";
-    private static final String KEY_APP_ID_ADX = "app_id_adx";
 
     private AppIdStore() {
     }

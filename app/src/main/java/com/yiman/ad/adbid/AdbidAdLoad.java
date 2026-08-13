@@ -1,64 +1,41 @@
 package com.yiman.ad.adbid;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.yiman.ad.utils.StringUtils;
-import com.adbid.media.AdBidLossInfo;
-import com.adbid.media.AdBidPlatform;
-import com.adbid.media.AdbidAdInfo;
-import com.adbid.media.AdbidBannerListener;
-import com.adbid.media.AdbidError;
-import com.adbid.media.AdbidListener;
-import com.adbid.media.AdbidRewardListener;
-import com.adbid.media.ad.AdbidAppOpen;
-import com.adbid.media.ad.AdbidBannerView;
-import com.adbid.media.ad.AdbidInterstitial;
-import com.adbid.media.ad.AdbidRewarded;
-import com.adbid.sdk.AdbidCustomController;
-import com.adbid.sdk.AdbidInitConfig;
-import com.adbid.sdk.AdbidLocation;
-import com.adbid.sdk.AdbidSdk;
-import com.adbid.sdk.AdbidSdkInitListener;
-import com.adbid.utils.ViewUtils;
+import cn.vlion.ad.inland.vl48.media.VL48AdbidAdInfo;
+import cn.vlion.ad.inland.vl48.media.VL48AdbidError;
+import cn.vlion.ad.inland.vl48.media.VL48AdbidListener;
+import cn.vlion.ad.inland.vl48.media.ad.VL48AdbidAppOpen;
+import cn.vlion.ad.inland.vl48.sdk.AdbidCustomController;
+import cn.vlion.ad.inland.vl48.sdk.AdbidInitConfig;
+import cn.vlion.ad.inland.vl48.sdk.AdbidLocation;
+import cn.vlion.ad.inland.vl48.sdk.AdbidSdk;
+import cn.vlion.ad.inland.vl48.sdk.AdbidSdkInitListener;
 import com.yiman.ad.AppIdStore;
 import com.yiman.ad.DemoRequestUtils;
 import com.yiman.ad.IAdLoad;
 import com.yiman.ad.MyApplication;
-import com.yiman.ad.adbid.ad.NativeAdActivity;
-import com.yiman.ad.adbid.ad.NativeAdDrawActivity;
-import com.yiman.ad.adbid.ad.NativeAdRecycleActivity;
 import com.yiman.ad.log.MainLogConsole;
 import com.yiman.ad.log.ToastHub;
 
 import java.lang.ref.SoftReference;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AdbidAdLoad extends IAdLoad {
     private static volatile AdbidAdLoad sInstance;
 
     @Nullable
-    AdbidAppOpen appOpenAd;
-    @Nullable
-    AdbidRewarded rewardedAd;
-    @Nullable
-    AdbidInterstitial interstitialAd;
-    private int size = 0;
+    VL48AdbidAppOpen appOpenAd;
     private SoftReference<ViewGroup> adContainer;
     private String token;
-    private boolean autoShowReward;
 
     private AdbidAdLoad(Context context, MainLogConsole logConsole) {
         super(context, logConsole);
@@ -141,7 +118,7 @@ public class AdbidAdLoad extends IAdLoad {
                     @Nullable
                     @Override
                     public String getDevOaid() {
-                        return "";
+                        return "f5cd4f70c1319b5a";
                     }
 
                     //是否允许SDK获取应用安装列表
@@ -237,7 +214,7 @@ public class AdbidAdLoad extends IAdLoad {
                 }).build();
         AdbidSdk.getInstance(MyApplication.myApplication).initialize(config, new AdbidSdkInitListener() {
             @Override
-            public void onSdkInitCallback(boolean isSuccess, AdbidError adbidError) {
+            public void onSdkInitCallback(boolean isSuccess, VL48AdbidError adbidError) {
                 if (isSuccess) {
                     logSuccess("初始化成功");
                     toast("初始化成功");
@@ -277,47 +254,42 @@ public class AdbidAdLoad extends IAdLoad {
         checkS2SBiddingToken(AdConfig.getAdConfig().getSplashUnitId(), new Runnable() {
             @Override
             public void run() {
-                AdbidListener appOpenAdListener = new AdbidListener() {
+                VL48AdbidListener appOpenAdListener = new VL48AdbidListener() {
                     @Override
-                    public void onAdLoad(@NonNull AdbidAdInfo adInfo) {
+                    public void onAdLoad(@NonNull VL48AdbidAdInfo adInfo) {
                         logSuccess("开屏广告加载成功，eCPM " + adInfo.getPrice());
                         toast("开屏广告加载成功");
-                        if (appOpenAd != null) {
-                            if (size % 2 > 0) appOpenAd.winNotice(1000);
-                            else appOpenAd.lossNotice(
-                                    new AdBidLossInfo(AdBidPlatform.GDT, 5000, "this is test " + "ad"));
-                            size++;
-                        }
                     }
 
                     @Override
-                    public void onAdLoadFail(@Nullable String adUnitId, @NonNull AdbidError error) {
+                    public void onAdLoadFail(@Nullable String adUnitId, @NonNull VL48AdbidError error) {
                         logError("开屏广告加载失败: " + error.getMessage());
                         toast("开屏广告加载失败");
                     }
 
                     @Override
-                    public void onAdDisplayed(@NonNull AdbidAdInfo adInfo) {
+                    public void onAdDisplayed(@NonNull VL48AdbidAdInfo adInfo) {
                         logSuccess("开屏广告展示成功");
                         toast("开屏广告展示成功");
                     }
 
                     @Override
-                    public void onAdDisplayedFailed(@NonNull AdbidAdInfo adInfo,
-                                                    @NonNull AdbidError error) {
+                    public void onAdDisplayedFailed(@NonNull VL48AdbidAdInfo adInfo,
+                                                    @NonNull VL48AdbidError error) {
                         logError("开屏广告展示失败: " + error.getMessage());
                         toast("开屏广告展示失败");
                     }
 
                     @Override
-                    public void onAdHidden(@NonNull AdbidAdInfo adInfo) {
-                        if (adContainer.get() != null) adContainer.get().removeAllViews();
+                    public void onAdHidden(@NonNull VL48AdbidAdInfo adInfo) {
+                        ViewGroup container = adContainer == null ? null : adContainer.get();
+                        if (container != null) container.removeAllViews();
                         logInfo("开屏广告关闭");
                         toast("开屏广告关闭");
                     }
 
                     @Override
-                    public void onAdClicked(@NonNull AdbidAdInfo adInfo) {
+                    public void onAdClicked(@NonNull VL48AdbidAdInfo adInfo) {
                         logInfo("开屏广告被点击");
                         toast("开屏广告被点击");
                     }
@@ -326,9 +298,9 @@ public class AdbidAdLoad extends IAdLoad {
                     appOpenAd.destroy();
                 }
                 if (StringUtils.isEmpty(token)) {
-                    appOpenAd = new AdbidAppOpen(AdConfig.getAdConfig().getSplashUnitId());
+                    appOpenAd = new VL48AdbidAppOpen(AdConfig.getAdConfig().getSplashUnitId());
                 } else {
-                    appOpenAd = new AdbidAppOpen(AdConfig.getAdConfig().getSplashUnitId(), token);
+                    appOpenAd = new VL48AdbidAppOpen(AdConfig.getAdConfig().getSplashUnitId(), token);
                 }
                 appOpenAd.setAdListener(appOpenAdListener);
                 appOpenAd.loadAd();
@@ -351,268 +323,11 @@ public class AdbidAdLoad extends IAdLoad {
     }
 
     @Override
-    public void loadInterstitial() {
-        checkS2SBiddingToken(AdConfig.getAdConfig().getInterUnitId(), () -> {
-            AdbidListener interListener = new AdbidListener() {
-                @Override
-                public void onAdLoad(@NonNull AdbidAdInfo adInfo) {
-                    logSuccess("插屏广告加载成功，eCPM " + adInfo.getPrice());
-                    toast("插屏广告加载成功");
-                    if (interstitialAd != null) {
-                        if (size % 2 > 0) interstitialAd.winNotice(1000);
-                        else interstitialAd.lossNotice(
-                                new AdBidLossInfo(AdBidPlatform.GDT, 5000, "this is test " + "ad"));
-                        size++;
-                    }
-                }
-
-                @Override
-                public void onAdLoadFail(@Nullable String adUnitId, @NonNull AdbidError error) {
-                    logError("插屏广告加载失败: " + error.getMessage());
-                    toast("插屏广告加载失败");
-                }
-
-                @Override
-                public void onAdDisplayed(@NonNull AdbidAdInfo adInfo) {
-                    logSuccess("插屏广告展示成功");
-                    toast("插屏广告展示成功");
-                }
-
-                @Override
-                public void onAdDisplayedFailed(@NonNull AdbidAdInfo adInfo,
-                                                @NonNull AdbidError error) {
-                    logError("插屏广告展示失败: " + error.getMessage());
-                    toast("插屏广告展示失败");
-                }
-
-                @Override
-                public void onAdHidden(@NonNull AdbidAdInfo adInfo) {
-                    logInfo("插屏广告关闭");
-                    toast("插屏广告关闭");
-                }
-
-                @Override
-                public void onAdClicked(@NonNull AdbidAdInfo adInfo) {
-                    logInfo("插屏广告被点击");
-                    toast("插屏广告被点击");
-                }
-            };
-            if (interstitialAd != null) {
-                interstitialAd.destroy();
-            }
-            interstitialAd = new AdbidInterstitial(AdConfig.getAdConfig().getInterUnitId(), token);
-            interstitialAd.setAdListener(interListener);
-            interstitialAd.loadAd();
-        });
-    }
-
-    @Override
-    public boolean isInterstitialReady() {
-        return interstitialAd != null && interstitialAd.isReady();
-    }
-
-    @Override
-    public void showInterstitial() {
-        if (isInterstitialReady()) {
-            interstitialAd.showAd();
-        }
-    }
-
-    @Override
-    public void loadReward() {
-        loadReward(false);
-    }
-
-    public void loadReward(boolean autoShow) {
-        autoShowReward = autoShow;
-        checkS2SBiddingToken(AdConfig.getAdConfig().getRewardUnitId(), () -> {
-            AdbidRewardListener adbidRewardListener = new AdbidRewardListener() {
-                @Override
-                public void onUserReward(@NonNull AdbidAdInfo adInfo) {
-                    logSuccess("激励广告发放奖励");
-                    toast("激励广告发放奖励");
-
-                }
-
-                @Override
-                public void onAdLoad(@NonNull AdbidAdInfo adInfo) {
-                    logSuccess("激励广告加载成功，eCPM " + adInfo.getPrice());
-                    toast("激励广告加载成功");
-                    if (rewardedAd != null) {
-                        if (autoShowReward) {
-                            rewardedAd.winNotice(1000);
-                            rewardedAd.showAd();
-                        } else {
-                            if (size % 2 > 0) rewardedAd.winNotice(1000);
-                            else rewardedAd.lossNotice(
-                                    new AdBidLossInfo(AdBidPlatform.GDT, 5000,
-                                            "this is test " + "ad"));
-                            size++;
-                        }
-                    }
-                }
-
-                @Override
-                public void onAdLoadFail(@Nullable String adUnitId, @NonNull AdbidError error) {
-                    logError("激励广告加载失败: " + error.getMessage());
-                    toast("激励广告加载失败");
-                }
-
-                @Override
-                public void onAdDisplayed(@NonNull AdbidAdInfo adInfo) {
-                    logSuccess("激励广告展示成功");
-                    toast("激励广告展示成功");
-                }
-
-                @Override
-                public void onAdDisplayedFailed(@NonNull AdbidAdInfo adInfo,
-                                                @NonNull AdbidError error) {
-                    logError("激励广告展示失败: " + error.getMessage());
-                    toast("激励广告展示失败");
-                }
-
-                @Override
-                public void onAdHidden(@NonNull AdbidAdInfo adInfo) {
-                    logInfo("激励广告关闭");
-                    toast("激励广告关闭");
-                }
-
-                @Override
-                public void onAdClicked(@NonNull AdbidAdInfo adInfo) {
-                    logInfo("激励广告被点击");
-                    toast("激励广告被点击");
-                }
-            };
-            rewardedAd = new AdbidRewarded(AdConfig.getAdConfig().getRewardUnitId(), token);
-            rewardedAd.setAdListener(adbidRewardListener);
-            Map<String, Object> extra = new HashMap<>();
-            extra.put("customId", "user_custom_id_12345");  // 用户自定义ID
-            extra.put("testId", 189978878);
-            extra.put("testUserName", "zhangSan");
-            extra.put("testAdInfo", new ArrayList<>());
-            rewardedAd.setLocalExtra(extra);
-            rewardedAd.loadAd();
-        });
-    }
-
-    @Override
-    public boolean isRewardReady() {
-        return rewardedAd != null && rewardedAd.isReady();
-    }
-
-    @Override
-    public void showReward() {
-        if (rewardedAd != null) rewardedAd.showAd();
-    }
-
-    @Override
-    public void showBanner(@NonNull ViewGroup viewGroup) {
-        checkS2SBiddingToken(AdConfig.getAdConfig().getBannerUnitId(), () -> {
-            AdbidBannerView bannerView = new AdbidBannerView(context);
-            bannerView.setUnitId(AdConfig.getAdConfig().getBannerUnitId());
-            int width = context.getResources().getDisplayMetrics().widthPixels;//定一个宽度值，比如屏幕宽度
-            int height = (int) (width / (320 / 50f));//按照比例转换高度的值
-            bannerView.setAdSize(width, height);
-            if (viewGroup instanceof FrameLayout) {
-                FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, height);
-                layoutParams.gravity = Gravity.CENTER;
-                bannerView.setLayoutParams(layoutParams);
-            } else {
-                bannerView.setLayoutParams(
-                        new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
-            }
-            bannerView.setBannerAdListener(new AdbidBannerListener() {
-                @Override
-                public void onBannerLoad(@NonNull AdbidAdInfo adInfo) {
-                    logSuccess("横幅广告加载成功");
-                    toast("横幅广告加载成功");
-                    viewGroup.removeAllViews();
-                    viewGroup.addView(bannerView);
-                    if (size % 2 > 0) bannerView.winNotice(1000);
-                    else bannerView.lossNotice(
-                            new AdBidLossInfo(AdBidPlatform.GDT, 5000, "this is " + "test " + "ad"));
-                    size++;
-                }
-
-                @Override
-                public void onBannerFail(@Nullable String adUnitId, @NonNull AdbidError error) {
-                    logError("横幅广告加载失败: " + error.getMessage());
-                    toast("横幅广告加载失败");
-                }
-
-                @Override
-                public void onBannerShow(@NonNull AdbidAdInfo adInfo) {
-                    logSuccess("横幅广告展示成功，eCPM " + adInfo.getPrice());
-                    toast("横幅广告展示成功");
-                }
-
-                @Override
-                public void onBannerClose(@NonNull AdbidAdInfo adInfo) {
-                    ViewUtils.removeFromParent(bannerView);
-                    logInfo("横幅广告关闭");
-                    toast("横幅广告关闭");
-                }
-
-                @Override
-                public void onBannerClicked(@NonNull AdbidAdInfo adInfo) {
-                    logInfo("横幅广告被点击");
-                    toast("横幅广告被点击");
-                }
-            });
-
-            bannerView.loadAd(token);
-        });
-    }
-
-    @Override
     public void destroy() {
         if (appOpenAd != null) {
             appOpenAd.destroy();
             appOpenAd = null;
         }
-        if (rewardedAd != null) {
-            rewardedAd.destroy();
-            rewardedAd = null;
-        }
-
-        if (interstitialAd != null) {
-            interstitialAd.destroy();
-            interstitialAd = null;
-        }
-    }
-
-    @Override
-    public void loadNative() {
-        checkS2SBiddingToken(AdConfig.getAdConfig().getNativeUnitId(), () -> {
-            Intent intent = new Intent(context, NativeAdActivity.class);
-            if (!StringUtils.isEmpty(token)) {
-                intent.putExtra("s2s_token", token);
-            }
-            context.startActivity(intent);
-        });
-    }
-
-    @Override
-    public void loadRecycleNative() {
-        checkS2SBiddingToken(AdConfig.getAdConfig().getNativeUnitId(), () -> {
-            Intent intent = new Intent(context, NativeAdRecycleActivity.class);
-            if (!StringUtils.isEmpty(token)) {
-                intent.putExtra("s2s_token", token);
-            }
-            context.startActivity(intent);
-        });
-    }
-
-    @Override
-    public void loadNativeDraw() {
-        checkS2SBiddingToken(AdConfig.getAdConfig().getNativeUnitId(), () -> {
-            Intent intent = new Intent(context, NativeAdDrawActivity.class);
-            if (!StringUtils.isEmpty(token)) {
-                intent.putExtra("s2s_token", token);
-            }
-            context.startActivity(intent);
-        });
     }
 
     private void logInfo(String msg) {
