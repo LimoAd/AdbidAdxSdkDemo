@@ -8,32 +8,34 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.yiman.ad.utils.StringUtils;
-import cn.vlion.ad.inland.vl48.media.VL48AdbidAdInfo;
-import cn.vlion.ad.inland.vl48.media.VL48AdbidError;
-import cn.vlion.ad.inland.vl48.media.VL48AdbidListener;
-import cn.vlion.ad.inland.vl48.media.ad.VL48AdbidAppOpen;
-import cn.vlion.ad.inland.vl48.sdk.AdbidCustomController;
-import cn.vlion.ad.inland.vl48.sdk.AdbidInitConfig;
-import cn.vlion.ad.inland.vl48.sdk.AdbidLocation;
-import cn.vlion.ad.inland.vl48.sdk.AdbidSdk;
-import cn.vlion.ad.inland.vl48.sdk.AdbidSdkInitListener;
 import com.yiman.ad.AppIdStore;
 import com.yiman.ad.DemoRequestUtils;
 import com.yiman.ad.IAdLoad;
 import com.yiman.ad.MyApplication;
 import com.yiman.ad.log.MainLogConsole;
 import com.yiman.ad.log.ToastHub;
+import com.yiman.ad.utils.StringUtils;
 
 import java.lang.ref.SoftReference;
 import java.util.Collections;
 import java.util.List;
 
+import cn.vlion.ad.inland.vl48.media.VL48AdInfo;
+import cn.vlion.ad.inland.vl48.media.VL48Error;
+import cn.vlion.ad.inland.vl48.media.VL48Listener;
+import cn.vlion.ad.inland.vl48.media.VL48MaterialInfo;
+import cn.vlion.ad.inland.vl48.media.ad.VL48AppOpen;
+import cn.vlion.ad.inland.vl48.sdk.VL48CustomController;
+import cn.vlion.ad.inland.vl48.sdk.VL48InitConfig;
+import cn.vlion.ad.inland.vl48.sdk.VL48Location;
+import cn.vlion.ad.inland.vl48.sdk.VL48Sdk;
+import cn.vlion.ad.inland.vl48.sdk.VL48SdkInitListener;
+
 public class AdbidAdLoad extends IAdLoad {
     private static volatile AdbidAdLoad sInstance;
 
     @Nullable
-    VL48AdbidAppOpen appOpenAd;
+    VL48AppOpen appOpenAd;
     private SoftReference<ViewGroup> adContainer;
     private String token;
 
@@ -73,9 +75,9 @@ public class AdbidAdLoad extends IAdLoad {
     @Override
     public void init() {
         // Reserved for manual initialization logic.
-        AdbidSdk.getInstance(MyApplication.myApplication).setDebugMode(true);
+        VL48Sdk.getInstance(MyApplication.myApplication).setDebugMode(true);
         //广告sdk初始化
-        AdbidInitConfig config = AdbidInitConfig.builder(AppIdStore.getSelectedAppId())
+        VL48InitConfig config = VL48InitConfig.builder(AppIdStore.getSelectedAppId())
                 //设置App渠道
                 .setAppChannel("xiaomi")
                 //设置App版本
@@ -83,7 +85,7 @@ public class AdbidAdLoad extends IAdLoad {
                 //设置用户ID
                 .setUserId("xxxxxx")
                 //设置隐私权限
-                .addCustomController(new AdbidCustomController() {
+                .addCustomController(new VL48CustomController() {
                     //是否允许SDK主动使用手机硬件参数（如IMEI）
                     @Override
                     public boolean isCanUsePhoneState() {
@@ -111,7 +113,7 @@ public class AdbidAdLoad extends IAdLoad {
                     //是否允许SDK主动获取OAID
                     @Override
                     public boolean isCanUseOaid() {
-                        return true;
+                        return false;
                     }
 
                     //开发者可传入OAID（当isCanUseOaid=false时生效）
@@ -195,7 +197,7 @@ public class AdbidAdLoad extends IAdLoad {
                     //开发者可传入定位信息
                     @Nullable
                     @Override
-                    public AdbidLocation getLocation() {
+                    public VL48Location getLocation() {
                         return null;
                     }
 
@@ -212,9 +214,9 @@ public class AdbidAdLoad extends IAdLoad {
                         return "";
                     }
                 }).build();
-        AdbidSdk.getInstance(MyApplication.myApplication).initialize(config, new AdbidSdkInitListener() {
+        VL48Sdk.getInstance(MyApplication.myApplication).initialize(config, new VL48SdkInitListener() {
             @Override
-            public void onSdkInitCallback(boolean isSuccess, VL48AdbidError adbidError) {
+            public void onSdkInitCallback(boolean isSuccess, @Nullable VL48Error vl48Error) {
                 if (isSuccess) {
                     logSuccess("初始化成功");
                     toast("初始化成功");
@@ -222,7 +224,6 @@ public class AdbidAdLoad extends IAdLoad {
                     logError("初始化失败");
                     toast("初始化失败");
                 }
-
             }
         });
     }
@@ -254,34 +255,36 @@ public class AdbidAdLoad extends IAdLoad {
         checkS2SBiddingToken(AdConfig.getAdConfig().getSplashUnitId(), new Runnable() {
             @Override
             public void run() {
-                VL48AdbidListener appOpenAdListener = new VL48AdbidListener() {
+                VL48Listener appOpenAdListener = new VL48Listener() {
+
                     @Override
-                    public void onAdLoad(@NonNull VL48AdbidAdInfo adInfo) {
+                    public void onAdLoad(@NonNull VL48AdInfo adInfo) {
                         logSuccess("开屏广告加载成功，eCPM " + adInfo.getPrice());
+                        VL48MaterialInfo info = adInfo.getAdMaterialInfo();
                         toast("开屏广告加载成功");
                     }
 
                     @Override
-                    public void onAdLoadFail(@Nullable String adUnitId, @NonNull VL48AdbidError error) {
+                    public void onAdLoadFail(@Nullable String adUnitId, @NonNull VL48Error error) {
                         logError("开屏广告加载失败: " + error.getMessage());
                         toast("开屏广告加载失败");
                     }
 
                     @Override
-                    public void onAdDisplayed(@NonNull VL48AdbidAdInfo adInfo) {
+                    public void onAdDisplayed(@NonNull VL48AdInfo adInfo) {
                         logSuccess("开屏广告展示成功");
                         toast("开屏广告展示成功");
                     }
 
                     @Override
-                    public void onAdDisplayedFailed(@NonNull VL48AdbidAdInfo adInfo,
-                                                    @NonNull VL48AdbidError error) {
+                    public void onAdDisplayedFailed(@NonNull VL48AdInfo adInfo,
+                                                    @NonNull VL48Error error) {
                         logError("开屏广告展示失败: " + error.getMessage());
                         toast("开屏广告展示失败");
                     }
 
                     @Override
-                    public void onAdHidden(@NonNull VL48AdbidAdInfo adInfo) {
+                    public void onAdHidden(@NonNull VL48AdInfo adInfo) {
                         ViewGroup container = adContainer == null ? null : adContainer.get();
                         if (container != null) container.removeAllViews();
                         logInfo("开屏广告关闭");
@@ -289,18 +292,19 @@ public class AdbidAdLoad extends IAdLoad {
                     }
 
                     @Override
-                    public void onAdClicked(@NonNull VL48AdbidAdInfo adInfo) {
+                    public void onAdClicked(@NonNull VL48AdInfo adInfo) {
                         logInfo("开屏广告被点击");
                         toast("开屏广告被点击");
                     }
                 };
+
                 if (appOpenAd != null) {
                     appOpenAd.destroy();
                 }
                 if (StringUtils.isEmpty(token)) {
-                    appOpenAd = new VL48AdbidAppOpen(AdConfig.getAdConfig().getSplashUnitId());
+                    appOpenAd = new VL48AppOpen(AdConfig.getAdConfig().getSplashUnitId());
                 } else {
-                    appOpenAd = new VL48AdbidAppOpen(AdConfig.getAdConfig().getSplashUnitId(), token);
+                    appOpenAd = new VL48AppOpen(AdConfig.getAdConfig().getSplashUnitId(), token);
                 }
                 appOpenAd.setAdListener(appOpenAdListener);
                 appOpenAd.loadAd();
