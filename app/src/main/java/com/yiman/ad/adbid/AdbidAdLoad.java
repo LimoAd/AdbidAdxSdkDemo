@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.gson.Gson;
 import com.yiman.ad.AppIdStore;
 import com.yiman.ad.DemoRequestUtils;
 import com.yiman.ad.IAdLoad;
@@ -23,13 +24,16 @@ import java.util.List;
 import cn.vlion.ad.inland.vl48.media.VL48AdInfo;
 import cn.vlion.ad.inland.vl48.media.VL48Error;
 import cn.vlion.ad.inland.vl48.media.VL48Listener;
+import cn.vlion.ad.inland.vl48.media.VL48LossInfo;
 import cn.vlion.ad.inland.vl48.media.VL48MaterialInfo;
+import cn.vlion.ad.inland.vl48.media.VL48Platform;
 import cn.vlion.ad.inland.vl48.media.ad.VL48AppOpen;
 import cn.vlion.ad.inland.vl48.sdk.VL48CustomController;
 import cn.vlion.ad.inland.vl48.sdk.VL48InitConfig;
 import cn.vlion.ad.inland.vl48.sdk.VL48Location;
 import cn.vlion.ad.inland.vl48.sdk.VL48Sdk;
 import cn.vlion.ad.inland.vl48.sdk.VL48SdkInitListener;
+import cn.vlion.ad.inland.vl48.utils.GsonUtils;
 
 public class AdbidAdLoad extends IAdLoad {
     private static volatile AdbidAdLoad sInstance;
@@ -260,8 +264,13 @@ public class AdbidAdLoad extends IAdLoad {
                     @Override
                     public void onAdLoad(@NonNull VL48AdInfo adInfo) {
                         logSuccess("开屏广告加载成功，eCPM " + adInfo.getPrice());
+                        //竞胜，入参竞胜次价
+                        appOpenAd.winNotice(1000);
+                        //竞败，入参竞胜平台、竞胜价格
+                        appOpenAd.lossNotice(new VL48LossInfo(VL48Platform.CSJ,2000,"price is low"));
+                        //获取广告信息
                         VL48MaterialInfo info = adInfo.getAdMaterialInfo();
-                        toast("开屏广告加载成功");
+                        toast("开屏广告加载成功："+ GsonUtils.toJson(info));
                     }
 
                     @Override
