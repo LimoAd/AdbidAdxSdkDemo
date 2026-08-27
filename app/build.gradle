@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
 }
 
+apply plugin: "AndResGuard"
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -40,8 +42,51 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+andResGuard {
+    def mapping = file("resource_mapping.txt")
+    mappingFile = mapping.exists() ? mapping : null
+    use7zip = true
+    useSign = true
+    keepRoot = false
+    mergeDuplicatedRes = true
+    whiteList = [
+            // Manifest 引用的资源
+            "R.mipmap.ic_launcher",
+            "R.mipmap.ic_launcher_round",
+            "R.string.app_name",
+            "R.xml.data_extraction_rules",
+            "R.xml.backup_rules",
+            "R.xml.network_security_config",
+            "R.style.Theme_AdBid",
+            // ConstraintLayout 约束 ID
+            "R.id.constraint*",
+            // 字体资源
+            "R.font.*",
+            // 常见 SDK 资源
+            "R.raw.*",
+    ]
+    compressFilePattern = [
+            "*.png",
+            "*.jpg",
+            "*.jpeg",
+            "*.gif",
+            "*.webp",
+    ]
+    sevenzip {
+        artifact = "io.github.leon406:SevenZip:1.2.23"
+    }
+}
+
+afterEvaluate {
+    tasks.matching { task ->
+        task.name.startsWith("resguard") && !task.name.toLowerCase().contains("release")
+    }.configureEach {
+        enabled = false
     }
 }
 
@@ -63,7 +108,7 @@ dependencies {
     //*********************广告adx接入*******************************************
 
     //领摩ADX
-    implementation(files("libs/adbid_sdk_2.1.0.22_0826_1037.aar"))
+    implementation(files("libs/adbid_sdk_2.1.0.22_0827_1117.aar"))
 
     //微信小程序,各平台都建议接入，有利于提高收益，需提供wxId
     implementation("com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0")

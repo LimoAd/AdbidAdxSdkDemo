@@ -2,10 +2,27 @@ ext {
     android = [compileSdkVersion: 33,
                minSdkVersion    : 21,
                targetSdkVersion : 31,
+               agpVersion       : "7.4.2",
                junitVersion     : '4.12',
                kotlin_version   : '1.4.21',
-               buildToolsVersion: "30.0.3",]
+               buildToolsVersion: "33.0.2",]
 
     sdkVersion = []
+
+    // AndResGuard (leon406) 版本适配矩阵
+    // - Gradle: 7.5 ~ 8.7
+    // - AGP:    7.0.4 / 7.3.1 / 7.4.x（不支持 8.x）
+    // - JVM:    17（需 --add-opens）；11 更稳定
+    gradle = [
+            version: "8.7",
+    ]
+
+    jvm = [
+            targetVersion: 17,
+    ]
+
+    andResGuard = [
+            pluginVersion: "1.2.23",
+    ]
 
 }
