@@ -1,25 +1,25 @@
 plugins {
     id 'com.android.application'
+    id 'AndResGuard'
 }
 
 android {
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    compileSdk rootProject.ext.android.compileSdkVersion
     namespace = "com.yiman.ad.adbid"
     defaultConfig {
         applicationId "com.limo.adx"
-        minSdkVersion rootProject.ext.android.minSdkVersion
-        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        minSdk rootProject.ext.android.minSdkVersion
+        targetSdk rootProject.ext.android.targetSdkVersion
         versionCode 20100019
         versionName "2.1.0.19"
     }
 
     signingConfigs {
         debug {
-            storeFile file("./key/ydyFarm.keystore") // 密钥库文件路径
-            storePassword "123456" // 密钥库密码
-            keyAlias "aprilIdiom" // 密钥别名
-            keyPassword "123456" // 0密钥密码
+            storeFile file("./key/ydyFarm.keystore")
+            storePassword "123456"
+            keyAlias "aprilIdiom"
+            keyPassword "123456"
             enableV2Signing true
         }
     }
@@ -27,20 +27,18 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
-            // 是否混淆
             minifyEnabled false
-            // 混淆配置文件的位置
         }
         release {
             signingConfig signingConfigs.debug
             minifyEnabled true
-            // 混淆配置文件的位置
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
@@ -50,8 +48,38 @@ repositories {
     }
 }
 
-dependencies {
+andResGuard {
+    use7zip = false
+    useSign = true
+    keepRoot = false
+    mergeDuplicatedRes = true
+    whiteList = [
+            "R.mipmap.ic_launcher",
+            "R.mipmap.ic_launcher_round",
+            "R.string.app_name",
+            "R.style.Theme_AdBid",
+            "R.anim.limo_*",
+            "R.attr.limo_*",
+            "R.color.limo_*",
+            "R.dimen.limo_*",
+            "R.drawable.limo_*",
+            "R.id.limo_*",
+            "R.layout.limo_*",
+            "R.raw.limo_*",
+            "R.string.limo_*",
+            "R.style.limo_*",
+            "R.xml.limo_*",
+    ]
+    compressFilePattern = [
+            "*.png",
+            "*.jpg",
+            "*.jpeg",
+            "*.gif",
+            "resources.arsc",
+    ]
+}
 
+dependencies {
     implementation(libs.androidx.core)
     implementation(libs.glide)
     implementation(libs.androidx.recyclerview)
@@ -63,12 +91,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
 
-
     //必选：领摩核心库
-    implementation(files("libs/adbid_sdk_2.1.0.21_0806_1038.aar"))
+    implementation(files("libs/adbid_sdk_2.1.0.22_0827_2027.aar"))
 
     //选择性接入(强烈建议)：微信小程序,有利于提高收益
     implementation("com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0")
-
 }
-
