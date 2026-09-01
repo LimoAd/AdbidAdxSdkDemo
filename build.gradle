@@ -5,8 +5,6 @@ buildscript {
         google()
         mavenCentral()
         maven { url 'https://www.jitpack.io' }
-        maven { url 'https://developer.huawei.com/repo' }
-        maven { url 'https://developer.hihonor.com/repo' }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:7.4.1"
@@ -18,8 +16,6 @@ allprojects {
         google()
         mavenCentral()
         maven { url 'https://www.jitpack.io' }
-        maven { url 'https://developer.huawei.com/repo' }
-        maven { url 'https://developer.hihonor.com/repo' }
     }
 }
 
