@@ -1,33 +1,84 @@
 package com.yiman.ad.adbid;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
+import com.yiman.ad.AppIdStore;
+import com.yiman.ad.IAdLoad;
+import com.yiman.ad.log.MainLogConsole;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("unused")
 public class AdConfig {
     private String appId;
-    private String appToken;
     private final String interUnitId;
     private final String nativeUnitId;
     private final String rewardUnitId;
     private final String splashUnitId;
     private final String bannerUnitId;
+    private String nativeUnitId2;
 
+    public static final String DEFAULT_APP_ID = "10005";
     private static final Map<String, AdConfig> configMap = new HashMap<>();
 
+    private static boolean s2sBiddingEnabled = false;
+
+    public static boolean isS2SBiddingEnabled() {
+        return s2sBiddingEnabled;
+    }
+
+    public static void setS2SBiddingEnabled(boolean enabled) {
+        s2sBiddingEnabled = enabled;
+    }
+
+
     static {
-        configMap.put("10005", new AdConfig("10005", "VaxesOELeH5iiKvajqEgkx7hz5IkEEWi", "MTc1MzkzMDgyNTk4MA==", "MTc1MzkzMTExNjA4NA==", "MTc1ODcwMDkyNjk1NA==", "MTc1MzkzMDY5NDkyOA==", "MTc1ODc5NjM5NTY4OA=="));
+
+
+        configMap.put("10005", new AdConfig("10005", "MTc1MzkzMDgyNTk4MA==", "MTc1MzkzMTExNjA4NA==",
+                "MTc1ODcwMDkyNjk1NA==", "MTc1MzkzMDY5NDkyOA==", "MTc1ODc5NjM5NTY4OA=="));
+         }
+
+    public static IAdLoad getAdLoad(@NonNull Context context, @NonNull MainLogConsole logConsole) {
+        return AdbidAdLoad.getInstance(context, logConsole);
+    }
+
+    @NonNull
+    public static String resolveSelectionKey(String appId) {
+        if (appId != null && configMap.containsKey(appId)) {
+            return appId;
+        }
+        return DEFAULT_APP_ID;
+    }
+
+
+    public String getNativeUnitId2() {
+        return nativeUnitId2;
+    }
+
+    @NonNull
+    public static String resolveAppId(String appId) {
+        return configMap.get(resolveSelectionKey(appId)).appId;
+    }
+
+    @NonNull
+    public static List<String> getAvailableAppIds() {
+        return new ArrayList<>(configMap.keySet());
     }
 
     public static AdConfig getAdConfig() {
-         return configMap.get("10005");
+        String selected = AppIdStore.getSelectedAppKey();
+        return configMap.get(resolveSelectionKey(selected));
     }
 
-    public AdConfig(String appId, String appToken, String interUnitId, String nativeUnitId, String rewardUnitId, String splashUnitId, String bannerUnitId) {
+    public AdConfig(String appId, String interUnitId, String nativeUnitId, String rewardUnitId,
+                    String splashUnitId, String bannerUnitId) {
         this.appId = appId;
-        this.appToken = appToken;
         this.interUnitId = interUnitId;
         this.nativeUnitId = nativeUnitId;
         this.rewardUnitId = rewardUnitId;
@@ -35,7 +86,17 @@ public class AdConfig {
         this.bannerUnitId = bannerUnitId;
     }
 
-    // Getters and Setters
+    public AdConfig(String appId, String interUnitId, String nativeUnitId, String rewardUnitId,
+                    String splashUnitId, String bannerUnitId, String nativeUnitId2) {
+        this.appId = appId;
+        this.interUnitId = interUnitId;
+        this.nativeUnitId = nativeUnitId;
+        this.nativeUnitId2 = nativeUnitId2;
+        this.rewardUnitId = rewardUnitId;
+        this.splashUnitId = splashUnitId;
+        this.bannerUnitId = bannerUnitId;
+    }
+
     public String getAppId() {
         return appId;
     }
@@ -44,13 +105,6 @@ public class AdConfig {
         this.appId = appId;
     }
 
-    public String getAppToken() {
-        return appToken;
-    }
-
-    public void setAppToken(String appToken) {
-        this.appToken = appToken;
-    }
 
     public String getInterUnitId() {
         return interUnitId;
@@ -80,8 +134,9 @@ public class AdConfig {
     @NonNull
     @Override
     public String toString() {
-        return "AdConfig{" + "appId='" + appId + '\'' + ", appToken='" + appToken + '\'' + ", interUnitId='" + interUnitId + '\'' + ", nativeUnitId='" + nativeUnitId + '\'' + ", rewardUnitId='" + rewardUnitId + '\'' + ", splashUnitId='" + splashUnitId + '\'' + ", bannerUnitId='" + bannerUnitId + '\'' + '}';
+        return "AdConfig{" + "appId='" + appId + '\'' + ", interUnitId='" + interUnitId + '\'' +
+                ", nativeUnitId='" + nativeUnitId + '\'' + ", rewardUnitId='" + rewardUnitId +
+                '\'' + ", splashUnitId='" + splashUnitId + '\'' + ", bannerUnitId='" +
+                bannerUnitId + '\'' + '}';
     }
 }
-
-

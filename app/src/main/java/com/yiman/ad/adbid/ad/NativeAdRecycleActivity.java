@@ -1,9 +1,10 @@
 package com.yiman.ad.adbid.ad;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -15,9 +16,10 @@ import com.yd.saas.hm.media.ad.AdbidNativeLoader;
 import com.yd.saas.hm.media.nativeAd.AdbidNativeAd;
 import com.yd.saas.hm.media.nativeOverseas.NativeAdbidLoadListener;
 import com.yiman.ad.adbid.AdConfig;
-import com.yiman.ad.adbid.BaseActivity;
+import com.yiman.ad.BaseActivity;
 import com.yiman.ad.adbid.R;
 import com.yiman.ad.adbid.bean.TestShopBean;
+import com.yiman.ad.adbid.view.TitleBar;
 
 import org.json.JSONArray;
 import org.json.JSONTokener;
@@ -38,7 +40,15 @@ public class NativeAdRecycleActivity extends BaseActivity implements NativeViewA
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_native_rcy);
+
+        TitleBar titleBar=findViewById(R.id.title_bar);
+        titleBar.setListener(new View.OnClickListener() {
+            @Override public void onClick(View view) {
+                finish();
+            }
+        });
         recyclerView = findViewById(R.id.recycle);
         LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
@@ -136,16 +146,19 @@ public class NativeAdRecycleActivity extends BaseActivity implements NativeViewA
                                     tempNativeBean.pos = adapter.getItemCount() - 2;
                                 }
                                 adapter.notifyDataSetChanged();
+                                printMsg("信息流加载成功");
                             }
 
                             @Override public void onNativeAdLoadFail(@NonNull AdbidError adError) {
-
+                                printMsg("信息流加载失败: " + adError.getMessage());
                             }
                         });
-        nativeLoader.loadAd();
+        String token = getIntent().getStringExtra("s2s_token");
+        nativeLoader.loadAd(token);
     }
 
     @Override public void printMsg(String s) {
         Log.i("AdbidSdkDemo", s);
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 }

@@ -49,4 +49,33 @@
         <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
         <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
     </style>
+<style name="ActionButtonBaseStyle" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">34dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+<style name="ActionLoadButtonStyle" parent="ActionButtonBaseStyle">
+        <item name="android:background">@drawable/btn_action_load</item>
+    </style>
+
+<style name="ActionReadyButtonStyle" parent="ActionButtonBaseStyle">
+        <item name="android:background">@drawable/btn_action_ready</item>
+    </style>
+
+<style name="ActionShowButtonStyle" parent="ActionButtonBaseStyle">
+        <item name="android:background">@drawable/btn_action_show</item>
+    </style>
+
+<style name="ActionAltButtonStyle" parent="ActionButtonBaseStyle">
+        <item name="android:background">@drawable/btn_action_alt</item>
+    </style>
+
 </resources>
