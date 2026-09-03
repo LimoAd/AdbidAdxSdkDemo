@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.yiman.ad.adbid.view.round.RoundLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:round_backgroundColor="@color/white"
-    app:round_cornerRadius="10dp">
+    android:background="@drawable/bg_white_round_10"
+    android:orientation="vertical">
 
 
     <!-- 全选选项 -->
@@ -60,4 +58,4 @@
         android:layout_margin="16dp"
         android:layout_weight="1"
         android:text="确定" />
-</com.yiman.ad.adbid.view.round.RoundLinearLayout>
+</LinearLayout>
