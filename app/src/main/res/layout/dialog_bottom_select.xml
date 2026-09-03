@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.yd.saas.hm.adx.view.round.LMRoundLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.yiman.ad.adbid.view.round.RoundLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:lm_backgroundColor="@color/white"
-    app:lm_cornerRadius="10dp"> <!-- 设置圆角背景 -->
+    app:round_backgroundColor="@color/white"
+    app:round_cornerRadius="10dp">
 
 
     <!-- 全选选项 -->
@@ -60,4 +60,4 @@
         android:layout_margin="16dp"
         android:layout_weight="1"
         android:text="确定" />
-</com.yd.saas.hm.adx.view.round.LMRoundLinearLayout>
+</com.yiman.ad.adbid.view.round.RoundLinearLayout>
