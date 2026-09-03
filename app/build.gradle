@@ -62,7 +62,7 @@ dependencies {
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
 
     //必选：领摩加载库
-    implementation(files("libs/adbid_sdk_2.1.0.21_0727_2026.aar"))
+    implementation(files("libs/adbid_sdk_2.1.0.23_0903_1150.aar"))
     //选择性接入(强烈建议)：微信小程序,有利于提高收益
     implementation("com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0")
 
