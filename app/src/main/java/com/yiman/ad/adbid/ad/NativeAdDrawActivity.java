@@ -10,10 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.adbid.media.AdbidError;
-import com.adbid.media.ad.AdbidNativeLoader;
-import com.adbid.media.nativeAd.AdbidNativeAd;
-import com.adbid.media.nativeOverseas.NativeAdbidLoadListener;
+import com.common.extension.ling.media.AdbidError;
+import com.common.extension.ling.media.ad.AdbidNativeLoader;
+import com.common.extension.ling.media.nativeAd.AdbidNativeAd;
+import com.common.extension.ling.media.nativeOverseas.NativeAdbidLoadListener;
 import com.yiman.ad.BaseActivity;
 import com.yiman.ad.adbid.AdConfig;
 import com.yiman.ad.adbid.R;

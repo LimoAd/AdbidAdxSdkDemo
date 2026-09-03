@@ -63,14 +63,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
 
-    //必选：领摩加载库
-    implementation(files("libs/adbid_sdk_2.1.0.23_0901_1849.aar"))
 
     //必选：领摩核心库
-    implementation(files("libs/adbid_limo_1.0.1_0623_1620.aar"))
-    implementation(files("libs/adbid_lmx_1.0.0_0616_2311.aar"))
-    //必选：领摩基础库
-    implementation(files("libs/adbid_common_1.0.0_0616_2248.aar"))
+    implementation(files("libs/adbid_sdk_2.1.0.23_0903_1712.aar"))
 
     //选择性接入(强烈建议)：微信小程序,有利于提高收益
     implementation("com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0")

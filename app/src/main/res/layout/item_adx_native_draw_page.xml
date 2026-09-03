@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/black">
 
-    <com.adbid.adx.ad.nativead.AxNativeAdContainer
+    <com.common.extension.ling.media.nativeAd.AdbidNativeAdView
         android:id="@+id/parent_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -247,7 +247,7 @@
                 </HorizontalScrollView>
             </LinearLayout>
         </FrameLayout>
-    </com.adbid.adx.ad.nativead.AxNativeAdContainer>
+    </com.common.extension.ling.media.nativeAd.AdbidNativeAdView>
 
     <LinearLayout
         android:id="@+id/fl_reward_entry"

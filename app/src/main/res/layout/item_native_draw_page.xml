@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/black">
 
-    <com.adbid.media.nativeAd.AdbidNativeAdView
+    <com.common.extension.ling.media.nativeAd.AdbidNativeAdView
         android:id="@+id/parent_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -247,7 +247,7 @@
                 </HorizontalScrollView>
             </LinearLayout>
         </FrameLayout>
-    </com.adbid.media.nativeAd.AdbidNativeAdView>
+    </com.common.extension.ling.media.nativeAd.AdbidNativeAdView>
 
     <!-- 右侧距底约 1/4 高度：仅广告 item 显示 -->
     <LinearLayout

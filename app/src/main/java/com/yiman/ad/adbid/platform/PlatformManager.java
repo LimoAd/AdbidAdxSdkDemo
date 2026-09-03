@@ -2,9 +2,9 @@ package com.yiman.ad.adbid.platform;
 
 import android.text.TextUtils;
 
-import com.adbid.media.AdBidPlatform;
-import com.adbid.sdk.AdbidSdk;
-import com.adbid.sdk.AdbidSdkConfiguration;
+import com.common.extension.ling.media.AdBidPlatform;
+import com.common.extension.ling.sdk.AdbidSdk;
+import com.common.extension.ling.sdk.AdbidSdkConfiguration;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yiman.ad.utils.PreferencesUtils;

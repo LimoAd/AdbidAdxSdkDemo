@@ -6,10 +6,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.adbid.media.AdbidAdInfo;
-import com.adbid.media.AdbidError;
-import com.adbid.media.AdbidListener;
-import com.adbid.media.ad.AdbidAppOpen;
+import com.common.extension.ling.media.AdbidAdInfo;
+import com.common.extension.ling.media.AdbidError;
+import com.common.extension.ling.media.AdbidListener;
+import com.common.extension.ling.media.ad.AdbidAppOpen;
 import com.yiman.ad.adbid.AdConfig;
 import com.yiman.ad.BaseActivity;
 import com.yiman.ad.adbid.R;
