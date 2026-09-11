@@ -18,7 +18,9 @@ public class AdConfig {
     private String appId;
     private final String splashUnitId;
 
-    public static final String DEFAULT_APP_ID = "10005";
+
+
+    public static final String DEFAULT_APP_ID = "10001";
     private static final Map<String, AdConfig> configMap = new HashMap<>();
 
     private static boolean s2sBiddingEnabled = false;
@@ -33,7 +35,7 @@ public class AdConfig {
 
 
     static {
-        configMap.put("10005", new AdConfig("10005", "MTc1MzkzMDY5NDkyOA=="));
+        configMap.put("10001", new AdConfig("10001", "MTc1MjcyMDQyMjgwOQ=="));
     }
 
     public static IAdLoad getAdLoad(@NonNull Context context, @NonNull MainLogConsole logConsole) {
