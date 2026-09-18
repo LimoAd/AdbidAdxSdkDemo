@@ -23,6 +23,7 @@ import com.adbid.media.ad.AdbidAppOpen;
 import com.adbid.media.ad.AdbidBannerView;
 import com.adbid.media.ad.AdbidInterstitial;
 import com.adbid.media.ad.AdbidRewarded;
+import com.adbid.utils.GsonUtils;
 import com.adbid.utils.ViewUtils;
 import com.yiman.ad.DemoRequestUtils;
 import com.yiman.ad.IAdLoad;
@@ -52,8 +53,8 @@ public class AdbidAdLoad extends IAdLoad {
         super(context);
     }
 
-    public void requestS2SBiddingToken(String adUnitId,Runnable runnable) {
-        if (Objects.equals(AdConfig.getAdConfig().getAppId(), "10005")){
+    public void requestS2SBiddingToken(String adUnitId, Runnable runnable) {
+        if (Objects.equals(AdConfig.getAdConfig().getAppId(), "10005")) {
             runnable.run();
             return;
         }
@@ -72,14 +73,15 @@ public class AdbidAdLoad extends IAdLoad {
 
     @Override
     public void loadSplash() {
-        String unitId=AdConfig.getAdConfig().getSplashUnitId();
-        Logger.i("loadSplash","start");
-        requestS2SBiddingToken(unitId,new Runnable() {
-            @Override public void run() {
+        String unitId = AdConfig.getAdConfig().getSplashUnitId();
+        Logger.i("loadSplash", "start");
+        requestS2SBiddingToken(unitId, new Runnable() {
+            @Override
+            public void run() {
                 AdbidListener appOpenAdListener = new AdbidListener() {
                     @Override
                     public void onAdLoad(@NonNull AdbidAdInfo adInfo) {
-                        logSuccess("开屏广告加载成功，eCPM " + adInfo.getPrice());
+                        logSuccess("开屏广告加载成功: " + (adInfo.getAdMaterialInfo() != null ?GsonUtils.toJson(adInfo.getAdMaterialInfo()) : ""));
                         toast("开屏广告加载成功");
                     }
 
@@ -96,8 +98,7 @@ public class AdbidAdLoad extends IAdLoad {
                     }
 
                     @Override
-                    public void onAdDisplayedFailed(@NonNull AdbidAdInfo adInfo,
-                                                    @NonNull AdbidError error) {
+                    public void onAdDisplayedFailed(@NonNull AdbidAdInfo adInfo, @NonNull AdbidError error) {
                         logError("开屏广告展示失败: " + error.getMessage());
                         toast("开屏广告展示失败");
                     }
@@ -151,8 +152,8 @@ public class AdbidAdLoad extends IAdLoad {
                 toast("插屏广告加载成功");
                 if (interstitialAd != null) {
                     if (size % 2 > 0) interstitialAd.winNotice(1000);
-                    else interstitialAd.lossNotice(
-                            new AdBidLossInfo(AdBidPlatform.GDT, 5000, "this is test " + "ad"));
+                    else
+                        interstitialAd.lossNotice(new AdBidLossInfo(AdBidPlatform.GDT, 5000, "this is test " + "ad"));
                     size++;
                 }
             }
@@ -170,8 +171,7 @@ public class AdbidAdLoad extends IAdLoad {
             }
 
             @Override
-            public void onAdDisplayedFailed(@NonNull AdbidAdInfo adInfo,
-                                            @NonNull AdbidError error) {
+            public void onAdDisplayedFailed(@NonNull AdbidAdInfo adInfo, @NonNull AdbidError error) {
                 logError("插屏广告展示失败: " + error.getMessage());
                 toast("插屏广告展示失败");
             }
@@ -224,8 +224,8 @@ public class AdbidAdLoad extends IAdLoad {
                 toast("激励广告加载成功");
                 if (rewardedAd != null) {
                     if (size % 2 > 0) rewardedAd.winNotice(1000);
-                    else rewardedAd.lossNotice(
-                            new AdBidLossInfo(AdBidPlatform.GDT, 5000, "this is test " + "ad"));
+                    else
+                        rewardedAd.lossNotice(new AdBidLossInfo(AdBidPlatform.GDT, 5000, "this is test " + "ad"));
 
                     size++;
                 }
@@ -244,8 +244,7 @@ public class AdbidAdLoad extends IAdLoad {
             }
 
             @Override
-            public void onAdDisplayedFailed(@NonNull AdbidAdInfo adInfo,
-                                            @NonNull AdbidError error) {
+            public void onAdDisplayedFailed(@NonNull AdbidAdInfo adInfo, @NonNull AdbidError error) {
                 logError("激励广告展示失败: " + error.getMessage());
                 toast("激励广告展示失败");
             }
@@ -292,13 +291,11 @@ public class AdbidAdLoad extends IAdLoad {
         int height = (int) (width / (320 / 50f));//按照比例转换高度的值
         bannerView.setAdSize(width, height);
         if (viewGroup instanceof FrameLayout) {
-            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, height);
+            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
             layoutParams.gravity = Gravity.CENTER;
             bannerView.setLayoutParams(layoutParams);
         } else {
-            bannerView.setLayoutParams(
-                    new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
+            bannerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
         }
         bannerView.setBannerAdListener(new AdbidBannerListener() {
             @Override
@@ -308,8 +305,8 @@ public class AdbidAdLoad extends IAdLoad {
                 viewGroup.removeAllViews();
                 viewGroup.addView(bannerView);
                 if (size % 2 > 0) bannerView.winNotice(1000);
-                else bannerView.lossNotice(
-                        new AdBidLossInfo(AdBidPlatform.GDT, 5000, "this is " + "test " + "ad"));
+                else
+                    bannerView.lossNotice(new AdBidLossInfo(AdBidPlatform.GDT, 5000, "this is " + "test " + "ad"));
                 size++;
             }
 

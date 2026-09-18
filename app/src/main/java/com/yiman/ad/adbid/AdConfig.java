@@ -27,8 +27,6 @@ import java.util.Map;
         configMap.put("10028",
                 new AdConfig("10028", "", "", "",
                         "MTc3OTg1ODEyOTc5Nw==", ""));
-        configMap.put("10005", new AdConfig("10005", "MTc1MzkzMDgyNTk4MA==", "MTc1MzkzMTExNjA4NA==",
-                "MTc1ODcwMDkyNjk1NA==", "MTc1MzkzMDY5NDkyOA==", "MTc1ODc5NjM5NTY4OA=="));
     }
 
     public static IAdLoad getAdLoad(@NonNull Context context) {

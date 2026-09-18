@@ -62,7 +62,7 @@ dependencies {
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
 
     //必选：领摩加载库
-    implementation(files("libs/adbid_sdk_2.1.0.23_0903_1650.aar"))
+    implementation(files("libs/adbid_sdk_2.1.0.24_0918_1438.aar"))
     //选择性接入(强烈建议)：微信小程序,有利于提高收益
     implementation("com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0")
 
@@ -70,6 +70,7 @@ dependencies {
     // 2.无需接入：如果禁用sdk获取oaid,必须手动向sdk传入OAID,此时无需接入
     implementation("com.huawei.hms:ads-identifier:3.4.62.300")
     implementation("com.hihonor.mcs:ads-identifier:1.0.2.301")
-
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
 }
 
