@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.adbid.media.AdBidPlatform;
 import com.adbid.media.AdbidError;
 import com.adbid.sdk.AdbidCustomController;
 import com.adbid.sdk.AdbidInitConfig;
