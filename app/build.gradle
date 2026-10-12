@@ -12,8 +12,8 @@ android {
         applicationId "com.yd.saas.hm.sdk.demo"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode 20100013
-        versionName "2.1.0.13"
+        versionCode 20100025
+        versionName "2.1.0.25"
     }
     signingConfigs {
         debug {
@@ -112,7 +112,7 @@ dependencies {
     //*********************广告adx接入*******************************************
 
     //领摩ADX
-    implementation(files("libs/adbid_sdk_2.1.0.23_0903_1658.aar"))
+    implementation(files("libs/adbid_sdk_2.1.0.25_1012_1140.aar"))
 
     //微信小程序,各平台都建议接入，有利于提高收益，需提供wxId
     implementation("com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0")
