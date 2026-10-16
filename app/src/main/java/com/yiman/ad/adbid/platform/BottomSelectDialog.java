@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.common.extension.ling.sdk.AdbidSdkConfiguration;
+import com.cqyh.cqadsdk.yz.sdk.CQYzSdkConfiguration;
 import com.yiman.ad.adbid.R;
 
 import java.util.List;

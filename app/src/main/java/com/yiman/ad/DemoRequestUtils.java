@@ -2,9 +2,10 @@ package com.yiman.ad;
 
 import android.text.TextUtils;
 
-import com.common.extension.ling.media.Logger;
-import com.common.extension.ling.sdk.AdbidSdk;
-import com.common.extension.ling.sdk.AdbidSdkInfoCallback;
+import com.cqyh.cqadsdk.yz.media.Logger;
+import com.cqyh.cqadsdk.yz.sdk.CQYzSdk;
+import com.cqyh.cqadsdk.yz.sdk.CQYzSdkInfoCallback;
+
 import com.yiman.ad.adbid.AdConfig;
 
 import org.json.JSONObject;
@@ -60,8 +61,8 @@ public class DemoRequestUtils {
 
                 long time = System.currentTimeMillis();
 
-                AdbidSdk.getInstance(MyApplication.myApplication.getApplicationContext())
-                        .getSdkInfo(posId, new AdbidSdkInfoCallback() {
+                CQYzSdk.getInstance(MyApplication.myApplication.getApplicationContext())
+                        .getSdkInfo(posId, new CQYzSdkInfoCallback() {
                             @Override public void onInfoCallback(String info) {
                                 Logger.d(TAG,"onInfoCallback time " +
                                         (System.currentTimeMillis() - time));
@@ -74,7 +75,7 @@ public class DemoRequestUtils {
                                     String postData = POST_DATA.replace("AD_UNIT_ID", posId)
                                             .replace("SDK_INFO", info)
                                             .replace("APP_ID", AdConfig.getAdConfig().getAppId())
-                                            .replace("SDK_VERSION",AdbidSdk.VERSION)
+                                            .replace("SDK_VERSION",CQYzSdk.VERSION)
                                             .replace("OA_ID","f89b6f636f4ed58f");
                                     Logger.d(TAG,"postData = " + postData);
                                     byte[] postDataBytes =

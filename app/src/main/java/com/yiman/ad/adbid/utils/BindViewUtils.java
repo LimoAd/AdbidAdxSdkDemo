@@ -16,11 +16,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.common.extension.ling.media.AdMaterialType;
-import com.common.extension.ling.media.Logger;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAd;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAdView;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAppInfo;
+import com.cqyh.cqadsdk.yz.media.AdMaterialType;
+import com.cqyh.cqadsdk.yz.media.Logger;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeAd;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeAdView;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeAppInfo;
 import com.bumptech.glide.Glide;
 import com.yiman.ad.adbid.R;
 
@@ -30,8 +30,8 @@ import java.util.List;
 public class BindViewUtils {
 
 
-    public static void registerView(Context context, @NonNull AdbidNativeAd nativeAd,
-                                    @NonNull AdbidNativeAdView nativeAdView) {
+    public static void registerView(Context context, @NonNull CQYzNativeAd nativeAd,
+                                    @NonNull CQYzNativeAdView nativeAdView) {
         TextView titleView = nativeAdView.findViewById(R.id.native_ad_title);
         nativeAdView.setTitleView(titleView);
         TextView descView = nativeAdView.findViewById(R.id.native_ad_desc);
@@ -171,7 +171,7 @@ public class BindViewUtils {
         }
     }
 
-    private static void initSixAppInfo(AdbidNativeAppInfo adAppInfo, View nativeAdView) {
+    private static void initSixAppInfo(CQYzNativeAppInfo adAppInfo, View nativeAdView) {
         View sixInfoView = nativeAdView.findViewById(R.id.six_info);
         if (adAppInfo != null) {
             sixInfoView.setVisibility(View.VISIBLE);
@@ -324,8 +324,8 @@ public class BindViewUtils {
         container.addView(verticalLayout);
     }
 
-   /* public static void registerCustomViewView(NativeAdActivity context, AdbidNativeAd nativeAd,
-                                              AdbidNativeAdView nativeAdView) {
+   /* public static void registerCustomViewView(NativeAdActivity context, CQYzNativeAd nativeAd,
+                                              CQYzNativeAdView nativeAdView) {
         TextView titleView = nativeAdView.findViewById(R.id.native_ad_title);
         TextView descView = nativeAdView.findViewById(R.id.native_ad_desc);
         TextView ctaView = nativeAdView.findViewById(R.id.native_ad_install_btn);

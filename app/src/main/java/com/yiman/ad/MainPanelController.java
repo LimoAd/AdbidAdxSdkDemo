@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.common.extension.ling.sdk.AdbidSdkConfiguration;
+import com.cqyh.cqadsdk.yz.sdk.CQYzSdkConfiguration;
 import com.yiman.ad.adbid.AdConfig;
 import com.yiman.ad.adbid.AdbidAdLoad;
 import com.yiman.ad.adbid.R;
@@ -113,7 +113,7 @@ public final class MainPanelController {
             AppIdStore.saveSelectedAppId(selectedAppId);
             refreshCurrentAppId();
 
-            if (AdbidSdkConfiguration.Instance.isInit()){
+            if (CQYzSdkConfiguration.Instance.isInit()){
                 ToastHub.show(activity, "已切换 " + selectedAppId + "，请手动重启");
                 restartApp();
             }else {

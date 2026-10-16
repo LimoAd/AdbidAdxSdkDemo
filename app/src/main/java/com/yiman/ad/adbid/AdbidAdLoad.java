@@ -12,23 +12,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.yiman.ad.utils.StringUtils;
-import com.common.extension.ling.media.AdBidLossInfo;
-import com.common.extension.ling.media.AdBidPlatform;
-import com.common.extension.ling.media.AdbidAdInfo;
-import com.common.extension.ling.media.AdbidBannerListener;
-import com.common.extension.ling.media.AdbidError;
-import com.common.extension.ling.media.AdbidListener;
-import com.common.extension.ling.media.AdbidRewardListener;
-import com.common.extension.ling.media.ad.AdbidAppOpen;
-import com.common.extension.ling.media.ad.AdbidBannerView;
-import com.common.extension.ling.media.ad.AdbidInterstitial;
-import com.common.extension.ling.media.ad.AdbidRewarded;
-import com.common.extension.ling.sdk.AdbidCustomController;
-import com.common.extension.ling.sdk.AdbidInitConfig;
-import com.common.extension.ling.sdk.AdbidLocation;
-import com.common.extension.ling.sdk.AdbidSdk;
-import com.common.extension.ling.sdk.AdbidSdkInitListener;
-import com.common.extension.ling.utils.ViewUtils;
+import com.cqyh.cqadsdk.yz.media.CQYzLossInfo;
+import com.cqyh.cqadsdk.yz.media.CQYzPlatform;
+import com.cqyh.cqadsdk.yz.media.CQYzAdInfo;
+import com.cqyh.cqadsdk.yz.media.CQYzBannerListener;
+import com.cqyh.cqadsdk.yz.media.CQYzError;
+import com.cqyh.cqadsdk.yz.media.CQYzListener;
+import com.cqyh.cqadsdk.yz.media.CQYzRewardListener;
+import com.cqyh.cqadsdk.yz.media.ad.CQYzAppOpen;
+import com.cqyh.cqadsdk.yz.media.ad.CQYzBannerView;
+import com.cqyh.cqadsdk.yz.media.ad.CQYzInterstitial;
+import com.cqyh.cqadsdk.yz.media.ad.CQYzRewarded;
+import com.cqyh.cqadsdk.yz.sdk.CQYzCustomController;
+import com.cqyh.cqadsdk.yz.sdk.CQYzInitConfig;
+import com.cqyh.cqadsdk.yz.sdk.CQYzLocation;
+import com.cqyh.cqadsdk.yz.sdk.CQYzSdk;
+import com.cqyh.cqadsdk.yz.sdk.CQYzSdkInitListener;
+import com.cqyh.cqadsdk.yz.utils.ViewUtils;
 import com.yiman.ad.AppIdStore;
 import com.yiman.ad.DemoRequestUtils;
 import com.yiman.ad.IAdLoad;
@@ -50,11 +50,11 @@ public class AdbidAdLoad extends IAdLoad {
     private static volatile AdbidAdLoad sInstance;
 
     @Nullable
-    AdbidAppOpen appOpenAd;
+    CQYzAppOpen appOpenAd;
     @Nullable
-    AdbidRewarded rewardedAd;
+    CQYzRewarded rewardedAd;
     @Nullable
-    AdbidInterstitial interstitialAd;
+    CQYzInterstitial interstitialAd;
     private int size = 0;
     private SoftReference<ViewGroup> adContainer;
     private String token;
@@ -96,9 +96,9 @@ public class AdbidAdLoad extends IAdLoad {
     @Override
     public void init() {
         // Reserved for manual initialization logic.
-        AdbidSdk.getInstance(MyApplication.myApplication).setDebugMode(true);
+        CQYzSdk.getInstance(MyApplication.myApplication).setDebugMode(true);
         //广告sdk初始化
-        AdbidInitConfig config = AdbidInitConfig.builder(AppIdStore.getSelectedAppId())
+        CQYzInitConfig config = CQYzInitConfig.builder(AppIdStore.getSelectedAppId())
                 //设置App渠道
                 .setAppChannel("xiaomi")
                 //设置App版本
@@ -106,7 +106,7 @@ public class AdbidAdLoad extends IAdLoad {
                 //设置用户ID
                 .setUserId("xxxxxx")
                 //设置隐私权限
-                .addCustomController(new AdbidCustomController() {
+                .addCustomController(new CQYzCustomController() {
                     //是否允许SDK主动使用手机硬件参数（如IMEI）
                     @Override
                     public boolean isCanUsePhoneState() {
@@ -218,7 +218,7 @@ public class AdbidAdLoad extends IAdLoad {
                     //开发者可传入定位信息
                     @Nullable
                     @Override
-                    public AdbidLocation getLocation() {
+                    public CQYzLocation getLocation() {
                         return null;
                     }
 
@@ -235,9 +235,9 @@ public class AdbidAdLoad extends IAdLoad {
                         return "";
                     }
                 }).build();
-        AdbidSdk.getInstance(MyApplication.myApplication).initialize(config, new AdbidSdkInitListener() {
+        CQYzSdk.getInstance(MyApplication.myApplication).initialize(config, new CQYzSdkInitListener() {
             @Override
-            public void onSdkInitCallback(boolean isSuccess, AdbidError adbidError) {
+            public void onSdkInitCallback(boolean isSuccess, CQYzError adbidError) {
                 if (isSuccess) {
                     logSuccess("初始化成功");
                     toast("初始化成功");
@@ -277,47 +277,47 @@ public class AdbidAdLoad extends IAdLoad {
         checkS2SBiddingToken(AdConfig.getAdConfig().getSplashUnitId(), new Runnable() {
             @Override
             public void run() {
-                AdbidListener appOpenAdListener = new AdbidListener() {
+                CQYzListener appOpenAdListener = new CQYzListener() {
                     @Override
-                    public void onAdLoad(@NonNull AdbidAdInfo adInfo) {
+                    public void onAdLoad(@NonNull CQYzAdInfo adInfo) {
                         logSuccess("开屏广告加载成功，eCPM " + adInfo.getPrice());
                         toast("开屏广告加载成功");
                         if (appOpenAd != null) {
                             if (size % 2 > 0) appOpenAd.winNotice(1000);
                             else appOpenAd.lossNotice(
-                                    new AdBidLossInfo(AdBidPlatform.GDT, 5000, "this is test " + "ad"));
+                                    new CQYzLossInfo(CQYzPlatform.GDT, 5000, "this is test " + "ad"));
                             size++;
                         }
                     }
 
                     @Override
-                    public void onAdLoadFail(@Nullable String adUnitId, @NonNull AdbidError error) {
+                    public void onAdLoadFail(@Nullable String adUnitId, @NonNull CQYzError error) {
                         logError("开屏广告加载失败: " + error.getMessage());
                         toast("开屏广告加载失败");
                     }
 
                     @Override
-                    public void onAdDisplayed(@NonNull AdbidAdInfo adInfo) {
+                    public void onAdDisplayed(@NonNull CQYzAdInfo adInfo) {
                         logSuccess("开屏广告展示成功");
                         toast("开屏广告展示成功");
                     }
 
                     @Override
-                    public void onAdDisplayedFailed(@NonNull AdbidAdInfo adInfo,
-                                                    @NonNull AdbidError error) {
+                    public void onAdDisplayedFailed(@NonNull CQYzAdInfo adInfo,
+                                                    @NonNull CQYzError error) {
                         logError("开屏广告展示失败: " + error.getMessage());
                         toast("开屏广告展示失败");
                     }
 
                     @Override
-                    public void onAdHidden(@NonNull AdbidAdInfo adInfo) {
+                    public void onAdHidden(@NonNull CQYzAdInfo adInfo) {
                         if (adContainer.get() != null) adContainer.get().removeAllViews();
                         logInfo("开屏广告关闭");
                         toast("开屏广告关闭");
                     }
 
                     @Override
-                    public void onAdClicked(@NonNull AdbidAdInfo adInfo) {
+                    public void onAdClicked(@NonNull CQYzAdInfo adInfo) {
                         logInfo("开屏广告被点击");
                         toast("开屏广告被点击");
                     }
@@ -326,9 +326,9 @@ public class AdbidAdLoad extends IAdLoad {
                     appOpenAd.destroy();
                 }
                 if (StringUtils.isEmpty(token)) {
-                    appOpenAd = new AdbidAppOpen(AdConfig.getAdConfig().getSplashUnitId());
+                    appOpenAd = new CQYzAppOpen(AdConfig.getAdConfig().getSplashUnitId());
                 } else {
-                    appOpenAd = new AdbidAppOpen(AdConfig.getAdConfig().getSplashUnitId(), token);
+                    appOpenAd = new CQYzAppOpen(AdConfig.getAdConfig().getSplashUnitId(), token);
                 }
                 appOpenAd.setAdListener(appOpenAdListener);
                 appOpenAd.loadAd();
@@ -353,46 +353,46 @@ public class AdbidAdLoad extends IAdLoad {
     @Override
     public void loadInterstitial() {
         checkS2SBiddingToken(AdConfig.getAdConfig().getInterUnitId(), () -> {
-            AdbidListener interListener = new AdbidListener() {
+            CQYzListener interListener = new CQYzListener() {
                 @Override
-                public void onAdLoad(@NonNull AdbidAdInfo adInfo) {
+                public void onAdLoad(@NonNull CQYzAdInfo adInfo) {
                     logSuccess("插屏广告加载成功，eCPM " + adInfo.getPrice());
                     toast("插屏广告加载成功");
                     if (interstitialAd != null) {
                         if (size % 2 > 0) interstitialAd.winNotice(1000);
                         else interstitialAd.lossNotice(
-                                new AdBidLossInfo(AdBidPlatform.GDT, 5000, "this is test " + "ad"));
+                                new CQYzLossInfo(CQYzPlatform.GDT, 5000, "this is test " + "ad"));
                         size++;
                     }
                 }
 
                 @Override
-                public void onAdLoadFail(@Nullable String adUnitId, @NonNull AdbidError error) {
+                public void onAdLoadFail(@Nullable String adUnitId, @NonNull CQYzError error) {
                     logError("插屏广告加载失败: " + error.getMessage());
                     toast("插屏广告加载失败");
                 }
 
                 @Override
-                public void onAdDisplayed(@NonNull AdbidAdInfo adInfo) {
+                public void onAdDisplayed(@NonNull CQYzAdInfo adInfo) {
                     logSuccess("插屏广告展示成功");
                     toast("插屏广告展示成功");
                 }
 
                 @Override
-                public void onAdDisplayedFailed(@NonNull AdbidAdInfo adInfo,
-                                                @NonNull AdbidError error) {
+                public void onAdDisplayedFailed(@NonNull CQYzAdInfo adInfo,
+                                                @NonNull CQYzError error) {
                     logError("插屏广告展示失败: " + error.getMessage());
                     toast("插屏广告展示失败");
                 }
 
                 @Override
-                public void onAdHidden(@NonNull AdbidAdInfo adInfo) {
+                public void onAdHidden(@NonNull CQYzAdInfo adInfo) {
                     logInfo("插屏广告关闭");
                     toast("插屏广告关闭");
                 }
 
                 @Override
-                public void onAdClicked(@NonNull AdbidAdInfo adInfo) {
+                public void onAdClicked(@NonNull CQYzAdInfo adInfo) {
                     logInfo("插屏广告被点击");
                     toast("插屏广告被点击");
                 }
@@ -400,7 +400,7 @@ public class AdbidAdLoad extends IAdLoad {
             if (interstitialAd != null) {
                 interstitialAd.destroy();
             }
-            interstitialAd = new AdbidInterstitial(AdConfig.getAdConfig().getInterUnitId(), token);
+            interstitialAd = new CQYzInterstitial(AdConfig.getAdConfig().getInterUnitId(), token);
             interstitialAd.setAdListener(interListener);
             interstitialAd.loadAd();
         });
@@ -426,16 +426,16 @@ public class AdbidAdLoad extends IAdLoad {
     public void loadReward(boolean autoShow) {
         autoShowReward = autoShow;
         checkS2SBiddingToken(AdConfig.getAdConfig().getRewardUnitId(), () -> {
-            AdbidRewardListener adbidRewardListener = new AdbidRewardListener() {
+            CQYzRewardListener adbidRewardListener = new CQYzRewardListener() {
                 @Override
-                public void onUserReward(@NonNull AdbidAdInfo adInfo) {
+                public void onUserReward(@NonNull CQYzAdInfo adInfo) {
                     logSuccess("激励广告发放奖励");
                     toast("激励广告发放奖励");
 
                 }
 
                 @Override
-                public void onAdLoad(@NonNull AdbidAdInfo adInfo) {
+                public void onAdLoad(@NonNull CQYzAdInfo adInfo) {
                     logSuccess("激励广告加载成功，eCPM " + adInfo.getPrice());
                     toast("激励广告加载成功");
                     if (rewardedAd != null) {
@@ -445,7 +445,7 @@ public class AdbidAdLoad extends IAdLoad {
                         } else {
                             if (size % 2 > 0) rewardedAd.winNotice(1000);
                             else rewardedAd.lossNotice(
-                                    new AdBidLossInfo(AdBidPlatform.GDT, 5000,
+                                    new CQYzLossInfo(CQYzPlatform.GDT, 5000,
                                             "this is test " + "ad"));
                             size++;
                         }
@@ -453,37 +453,37 @@ public class AdbidAdLoad extends IAdLoad {
                 }
 
                 @Override
-                public void onAdLoadFail(@Nullable String adUnitId, @NonNull AdbidError error) {
+                public void onAdLoadFail(@Nullable String adUnitId, @NonNull CQYzError error) {
                     logError("激励广告加载失败: " + error.getMessage());
                     toast("激励广告加载失败");
                 }
 
                 @Override
-                public void onAdDisplayed(@NonNull AdbidAdInfo adInfo) {
+                public void onAdDisplayed(@NonNull CQYzAdInfo adInfo) {
                     logSuccess("激励广告展示成功");
                     toast("激励广告展示成功");
                 }
 
                 @Override
-                public void onAdDisplayedFailed(@NonNull AdbidAdInfo adInfo,
-                                                @NonNull AdbidError error) {
+                public void onAdDisplayedFailed(@NonNull CQYzAdInfo adInfo,
+                                                @NonNull CQYzError error) {
                     logError("激励广告展示失败: " + error.getMessage());
                     toast("激励广告展示失败");
                 }
 
                 @Override
-                public void onAdHidden(@NonNull AdbidAdInfo adInfo) {
+                public void onAdHidden(@NonNull CQYzAdInfo adInfo) {
                     logInfo("激励广告关闭");
                     toast("激励广告关闭");
                 }
 
                 @Override
-                public void onAdClicked(@NonNull AdbidAdInfo adInfo) {
+                public void onAdClicked(@NonNull CQYzAdInfo adInfo) {
                     logInfo("激励广告被点击");
                     toast("激励广告被点击");
                 }
             };
-            rewardedAd = new AdbidRewarded(AdConfig.getAdConfig().getRewardUnitId(), token);
+            rewardedAd = new CQYzRewarded(AdConfig.getAdConfig().getRewardUnitId(), token);
             rewardedAd.setAdListener(adbidRewardListener);
             Map<String, Object> extra = new HashMap<>();
             extra.put("customId", "user_custom_id_12345");  // 用户自定义ID
@@ -508,7 +508,7 @@ public class AdbidAdLoad extends IAdLoad {
     @Override
     public void showBanner(@NonNull ViewGroup viewGroup) {
         checkS2SBiddingToken(AdConfig.getAdConfig().getBannerUnitId(), () -> {
-            AdbidBannerView bannerView = new AdbidBannerView(context);
+            CQYzBannerView bannerView = new CQYzBannerView(context);
             bannerView.setUnitId(AdConfig.getAdConfig().getBannerUnitId());
             int width = context.getResources().getDisplayMetrics().widthPixels;//定一个宽度值，比如屏幕宽度
             int height = (int) (width / (320 / 50f));//按照比例转换高度的值
@@ -522,40 +522,40 @@ public class AdbidAdLoad extends IAdLoad {
                 bannerView.setLayoutParams(
                         new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
             }
-            bannerView.setBannerAdListener(new AdbidBannerListener() {
+            bannerView.setBannerAdListener(new CQYzBannerListener() {
                 @Override
-                public void onBannerLoad(@NonNull AdbidAdInfo adInfo) {
+                public void onBannerLoad(@NonNull CQYzAdInfo adInfo) {
                     logSuccess("横幅广告加载成功");
                     toast("横幅广告加载成功");
                     viewGroup.removeAllViews();
                     viewGroup.addView(bannerView);
                     if (size % 2 > 0) bannerView.winNotice(1000);
                     else bannerView.lossNotice(
-                            new AdBidLossInfo(AdBidPlatform.GDT, 5000, "this is " + "test " + "ad"));
+                            new CQYzLossInfo(CQYzPlatform.GDT, 5000, "this is " + "test " + "ad"));
                     size++;
                 }
 
                 @Override
-                public void onBannerFail(@Nullable String adUnitId, @NonNull AdbidError error) {
+                public void onBannerFail(@Nullable String adUnitId, @NonNull CQYzError error) {
                     logError("横幅广告加载失败: " + error.getMessage());
                     toast("横幅广告加载失败");
                 }
 
                 @Override
-                public void onBannerShow(@NonNull AdbidAdInfo adInfo) {
+                public void onBannerShow(@NonNull CQYzAdInfo adInfo) {
                     logSuccess("横幅广告展示成功，eCPM " + adInfo.getPrice());
                     toast("横幅广告展示成功");
                 }
 
                 @Override
-                public void onBannerClose(@NonNull AdbidAdInfo adInfo) {
+                public void onBannerClose(@NonNull CQYzAdInfo adInfo) {
                     ViewUtils.removeFromParent(bannerView);
                     logInfo("横幅广告关闭");
                     toast("横幅广告关闭");
                 }
 
                 @Override
-                public void onBannerClicked(@NonNull AdbidAdInfo adInfo) {
+                public void onBannerClicked(@NonNull CQYzAdInfo adInfo) {
                     logInfo("横幅广告被点击");
                     toast("横幅广告被点击");
                 }
@@ -617,17 +617,17 @@ public class AdbidAdLoad extends IAdLoad {
 
     private void logInfo(String msg) {
         logConsole.info(msg);
-        Log.i("AdbidSdk", msg);
+        Log.i("CQYzSdk", msg);
     }
 
     private void logSuccess(String msg) {
         logConsole.success(msg);
-        Log.i("AdbidSdk", msg);
+        Log.i("CQYzSdk", msg);
     }
 
     private void logError(String msg) {
         logConsole.error(msg);
-        Log.e("AdbidSdk", msg);
+        Log.e("CQYzSdk", msg);
     }
 
     private void toast(String msg) {

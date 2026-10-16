@@ -17,14 +17,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.common.extension.ling.media.AdMaterialType;
-import com.common.extension.ling.media.AdbidAdInfo;
-import com.common.extension.ling.media.AdbidError;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAd;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAdView;
-import com.common.extension.ling.media.nativeAd.AdbidNativeEventListener;
-import com.common.extension.ling.media.nativeAd.AdbidNativeVideoListener;
-import com.common.extension.ling.utils.ViewUtils;
+import com.cqyh.cqadsdk.yz.media.AdMaterialType;
+import com.cqyh.cqadsdk.yz.media.CQYzAdInfo;
+import com.cqyh.cqadsdk.yz.media.CQYzError;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeAd;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeAdView;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeEventListener;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeVideoListener;
+import com.cqyh.cqadsdk.yz.utils.ViewUtils;
 import com.bumptech.glide.Glide;
 import com.yiman.ad.adbid.R;
 import com.yiman.ad.adbid.bean.TestShopBean;
@@ -72,7 +72,7 @@ public class NativeViewAdapter extends RecyclerView.Adapter {
                 ((ViewGroup) target.getParent()).removeView(target);
             ((NativeExpressAdHolder) holder).nativeExpressView.addView(target, new ViewGroup.LayoutParams(-1, -2));*/
         } else if (holder instanceof NativeAdHolder) {
-            AdbidNativeAd nativeAd = getItem(position).nativeAd;
+            CQYzNativeAd nativeAd = getItem(position).nativeAd;
             NativeAdHolder nativeHolder = (NativeAdHolder) holder;
             String imageUrl;
             View mediaView = nativeAd.getMediaView();
@@ -85,7 +85,7 @@ public class NativeViewAdapter extends RecyclerView.Adapter {
                 ViewUtils.removeFromParent(mediaView);
                 nativeHolder.videoLayout.addView(mediaView, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 clickViews.add(nativeHolder.videoLayout);
-                nativeAd.setVideoListener(new AdbidNativeVideoListener() {
+                nativeAd.setVideoListener(new CQYzNativeVideoListener() {
 
                     @Override
                     public void onVideoStart() {
@@ -112,7 +112,7 @@ public class NativeViewAdapter extends RecyclerView.Adapter {
                     }
 
                     @Override
-                    public void onVideoError(AdbidError var1) {
+                    public void onVideoError(CQYzError var1) {
                         if (null != consoleCallback)
                             consoleCallback.printMsg("视频播放出错: " + var1.getMessage());
                     }
@@ -151,19 +151,19 @@ public class NativeViewAdapter extends RecyclerView.Adapter {
             clickViews.add(nativeHolder.titleTv);
 
             (nativeHolder.closeBtn).setVisibility(VISIBLE);
-            nativeAd.setEventListener(new AdbidNativeEventListener() {
+            nativeAd.setEventListener(new CQYzNativeEventListener() {
                 @Override
-                public void onImpression(@NonNull AdbidNativeAdView view, @NonNull AdbidAdInfo adInfo) {
+                public void onImpression(@NonNull CQYzNativeAdView view, @NonNull CQYzAdInfo adInfo) {
                     if (null != consoleCallback) consoleCallback.printMsg("信息流曝光成功");
                 }
 
                 @Override
-                public void onNativeAdClick(@NonNull AdbidNativeAdView view, @NonNull AdbidAdInfo adInfo) {
+                public void onNativeAdClick(@NonNull CQYzNativeAdView view, @NonNull CQYzAdInfo adInfo) {
                     if (null != consoleCallback) consoleCallback.printMsg("信息流被点击");
                 }
 
                 @Override
-                public void onAdClose(@Nullable AdbidNativeAdView view) {
+                public void onAdClose(@Nullable CQYzNativeAdView view) {
                     if (null != consoleCallback) consoleCallback.printMsg("信息流已关闭");
                     list.remove(holder.getAdapterPosition());
                     notifyDataSetChanged();
@@ -241,7 +241,7 @@ public class NativeViewAdapter extends RecyclerView.Adapter {
 
     private static class NativeAdHolder extends RecyclerView.ViewHolder {
 
-        AdbidNativeAdView nativeLayout;
+        CQYzNativeAdView nativeLayout;
         TextView titleTv;
         TextView authorTv;
         TextView timeTv;

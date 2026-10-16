@@ -10,10 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.common.extension.ling.media.AdbidError;
-import com.common.extension.ling.media.ad.AdbidNativeLoader;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAd;
-import com.common.extension.ling.media.nativeOverseas.NativeAdbidLoadListener;
+import com.cqyh.cqadsdk.yz.media.CQYzError;
+import com.cqyh.cqadsdk.yz.media.ad.CQYzNativeLoader;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeAd;
+import com.cqyh.cqadsdk.yz.media.nativeOverseas.CQYzNativeLoadListener;
 import com.yiman.ad.BaseActivity;
 import com.yiman.ad.adbid.AdConfig;
 import com.yiman.ad.adbid.R;
@@ -110,7 +110,7 @@ public class NativeAdDrawActivity extends BaseActivity implements NativeDrawPage
             adapter.notifyDataSetChanged();
             ensureAdPreload(0);
         } catch (Exception e) {
-            Log.e("AdbidSdkDemo", "load draw data failed", e);
+            Log.e("CQYzSdkDemo", "load draw data failed", e);
         }
     }
 
@@ -154,10 +154,10 @@ public class NativeAdDrawActivity extends BaseActivity implements NativeDrawPage
         pendingAdSlots.add(slotIndex);
         pendingAdRequestCount++;
         isRequestingAd = true;
-        AdbidNativeLoader nativeLoader = new AdbidNativeLoader(this,
-                AdConfig.getAdConfig().getNativeUnitId(), new NativeAdbidLoadListener() {
+        CQYzNativeLoader nativeLoader = new CQYzNativeLoader(this,
+                AdConfig.getAdConfig().getNativeUnitId(), new CQYzNativeLoadListener() {
             @Override
-            public void onNativeAdLoaded(@NonNull AdbidNativeAd nativeAd) {
+            public void onNativeAdLoaded(@NonNull CQYzNativeAd nativeAd) {
                 pendingAdSlots.remove(slotIndex);
                 pendingAdRequestCount = Math.max(0, pendingAdRequestCount - 1);
                 if (slotIndex < drawList.size()
@@ -174,7 +174,7 @@ public class NativeAdDrawActivity extends BaseActivity implements NativeDrawPage
             }
 
             @Override
-            public void onNativeAdLoadFail(@NonNull AdbidError adError) {
+            public void onNativeAdLoadFail(@NonNull CQYzError adError) {
                 pendingAdSlots.remove(slotIndex);
                 pendingAdRequestCount = Math.max(0, pendingAdRequestCount - 1);
                 isRequestingAd = pendingAdRequestCount > 0;
@@ -187,7 +187,7 @@ public class NativeAdDrawActivity extends BaseActivity implements NativeDrawPage
 
     @Override
     public void printMsg(String s) {
-        Log.i("AdbidSdkDemo", s);
+        Log.i("CQYzSdkDemo", s);
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 

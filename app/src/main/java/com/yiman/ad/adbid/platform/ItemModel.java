@@ -1,6 +1,6 @@
 package com.yiman.ad.adbid.platform;
 
-import com.common.extension.ling.media.AdBidPlatform;
+import com.cqyh.cqadsdk.yz.media.CQYzPlatform;
 
 public class ItemModel {
     private String name;
@@ -13,11 +13,11 @@ public class ItemModel {
         this.adBidPlatform = adBidPlatform;
     }
 
-    public String getAdBidPlatform() {
+    public String getCQYzPlatform() {
         return adBidPlatform;
     }
 
-    public void setAdBidPlatform(String adBidPlatform) {
+    public void setCQYzPlatform(String adBidPlatform) {
         this.adBidPlatform = adBidPlatform;
     }
 

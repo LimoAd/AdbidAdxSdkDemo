@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.common.extension.ling.media.AdbidError;
-import com.common.extension.ling.media.ad.AdbidNativeLoader;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAd;
-import com.common.extension.ling.media.nativeOverseas.NativeAdbidLoadListener;
+import com.cqyh.cqadsdk.yz.media.CQYzError;
+import com.cqyh.cqadsdk.yz.media.ad.CQYzNativeLoader;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeAd;
+import com.cqyh.cqadsdk.yz.media.nativeOverseas.CQYzNativeLoadListener;
 import com.yiman.ad.adbid.AdConfig;
 import com.yiman.ad.BaseActivity;
 import com.yiman.ad.adbid.R;
@@ -131,11 +131,11 @@ public class NativeAdRecycleActivity extends BaseActivity implements NativeViewA
     }
 
     @SuppressLint("NotifyDataSetChanged") protected void requestAd() {
-        AdbidNativeLoader nativeLoader =
-                new AdbidNativeLoader(this, AdConfig.getAdConfig().getNativeUnitId(),
-                        new NativeAdbidLoadListener() {
+        CQYzNativeLoader nativeLoader =
+                new CQYzNativeLoader(this, AdConfig.getAdConfig().getNativeUnitId(),
+                        new CQYzNativeLoadListener() {
                             @Override
-                            public void onNativeAdLoaded(@NonNull AdbidNativeAd nativeAd) {
+                            public void onNativeAdLoaded(@NonNull CQYzNativeAd nativeAd) {
                                 final TestShopBean tempNativeBean = new TestShopBean();
                                 tempNativeBean.itemType = NativeViewAdapter.NATIVE;
                                 tempNativeBean.nativeAd = nativeAd;
@@ -149,7 +149,7 @@ public class NativeAdRecycleActivity extends BaseActivity implements NativeViewA
                                 printMsg("信息流加载成功");
                             }
 
-                            @Override public void onNativeAdLoadFail(@NonNull AdbidError adError) {
+                            @Override public void onNativeAdLoadFail(@NonNull CQYzError adError) {
                                 printMsg("信息流加载失败: " + adError.getMessage());
                             }
                         });
@@ -158,7 +158,7 @@ public class NativeAdRecycleActivity extends BaseActivity implements NativeViewA
     }
 
     @Override public void printMsg(String s) {
-        Log.i("AdbidSdkDemo", s);
+        Log.i("CQYzSdkDemo", s);
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 }

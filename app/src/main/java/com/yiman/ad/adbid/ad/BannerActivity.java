@@ -7,17 +7,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.common.extension.ling.media.AdbidAdInfo;
-import com.common.extension.ling.media.AdbidBannerListener;
-import com.common.extension.ling.media.AdbidError;
-import com.common.extension.ling.media.ad.AdbidBannerView;
+import com.cqyh.cqadsdk.yz.media.CQYzAdInfo;
+import com.cqyh.cqadsdk.yz.media.CQYzBannerListener;
+import com.cqyh.cqadsdk.yz.media.CQYzError;
+import com.cqyh.cqadsdk.yz.media.ad.CQYzBannerView;
 import com.yiman.ad.adbid.AdConfig;
 import com.yiman.ad.BaseActivity;
 import com.yiman.ad.adbid.R;
 import com.yiman.ad.adbid.view.TitleBar;
 
 public class BannerActivity extends BaseActivity {
-    private @Nullable AdbidBannerView bannerView;
+    private @Nullable CQYzBannerView bannerView;
 
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,14 +26,14 @@ public class BannerActivity extends BaseActivity {
         titleBar.setTitle(R.string.app_banner_name);
         titleBar.setListener(view -> finish());
 
-        bannerView = new AdbidBannerView(BannerActivity.this);
+        bannerView = new CQYzBannerView(BannerActivity.this);
         int width = getResources().getDisplayMetrics().widthPixels;//定一个宽度值，比如屏幕宽度
         int height = (int) (width / (320 / 50f));//按照比例转换高度的值
         bannerView.setAdSize(width, height);
         bannerView.setUnitId(AdConfig.getAdConfig().getBannerUnitId());
         ViewGroup bannerContainer = findViewById(R.id.banner_container);
-        bannerView.setBannerAdListener(new AdbidBannerListener() {
-            @Override public void onBannerLoad(@NonNull AdbidAdInfo adInfo) {
+        bannerView.setBannerAdListener(new CQYzBannerListener() {
+            @Override public void onBannerLoad(@NonNull CQYzAdInfo adInfo) {
 
                 //获取广告价格，单位分
                 double price = adInfo.getPrice();
@@ -47,16 +47,16 @@ public class BannerActivity extends BaseActivity {
             }
 
             @Override
-            public void onBannerFail(@Nullable String adUnitId, @NonNull AdbidError error) {
+            public void onBannerFail(@Nullable String adUnitId, @NonNull CQYzError error) {
                 log("横幅广告加载失败：" + error.getMessage());
             }
 
-            @Override public void onBannerShow(@NonNull AdbidAdInfo adInfo) {
+            @Override public void onBannerShow(@NonNull CQYzAdInfo adInfo) {
                 log("插屏广告加展示");
 
             }
 
-            @Override public void onBannerClose(@NonNull AdbidAdInfo adInfo) {
+            @Override public void onBannerClose(@NonNull CQYzAdInfo adInfo) {
                 log("插屏广告消失");
                 //销毁广告, 调用销毁后需要重新新建
                 if (bannerView != null) {
@@ -64,7 +64,7 @@ public class BannerActivity extends BaseActivity {
                 }
             }
 
-            @Override public void onBannerClicked(@NonNull AdbidAdInfo adInfo) {
+            @Override public void onBannerClicked(@NonNull CQYzAdInfo adInfo) {
                 log("插屏广告触发点击");
             }
         });

@@ -23,15 +23,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.common.extension.ling.media.AdMaterialType;
-import com.common.extension.ling.media.AdbidAdInfo;
-import com.common.extension.ling.media.AdbidError;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAppInfo;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAd;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAdView;
-import com.common.extension.ling.media.nativeAd.AdbidNativeEventListener;
-import com.common.extension.ling.media.nativeAd.AdbidNativeVideoListener;
-import com.common.extension.ling.utils.ViewUtils;
+import com.cqyh.cqadsdk.yz.media.AdMaterialType;
+import com.cqyh.cqadsdk.yz.media.CQYzAdInfo;
+import com.cqyh.cqadsdk.yz.media.CQYzError;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeAppInfo;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeAd;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeAdView;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeEventListener;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeVideoListener;
+import com.cqyh.cqadsdk.yz.utils.ViewUtils;
 import com.bumptech.glide.Glide;
 import com.yiman.ad.adbid.AdbidAdLoad;
 import com.yiman.ad.adbid.R;
@@ -92,7 +92,7 @@ public class NativeDrawPagerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             return;
         }
 
-        AdbidNativeAd nativeAd = item.nativeAd;
+        CQYzNativeAd nativeAd = item.nativeAd;
         String imageUrl;
         View mediaView = nativeAd.getMediaView();
         List<View> clickViews = new ArrayList<>();
@@ -103,7 +103,7 @@ public class NativeDrawPagerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             holder.videoLayout.addView(mediaView, new RelativeLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             clickViews.add(holder.videoLayout);
-            nativeAd.setVideoListener(new AdbidNativeVideoListener() {
+            nativeAd.setVideoListener(new CQYzNativeVideoListener() {
                 @Override
                 public void onVideoStart() {
                     if (consoleCallback != null) {
@@ -133,7 +133,7 @@ public class NativeDrawPagerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 }
 
                 @Override
-                public void onVideoError(AdbidError error) {
+                public void onVideoError(CQYzError error) {
 
                 }
 
@@ -176,24 +176,24 @@ public class NativeDrawPagerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         if (holder.iconContainer.getVisibility() == VISIBLE) {
             clickViews.add(holder.iconContainer);
         }
-        nativeAd.setEventListener(new AdbidNativeEventListener() {
+        nativeAd.setEventListener(new CQYzNativeEventListener() {
             @Override
-            public void onImpression(@NonNull AdbidNativeAdView view, @NonNull AdbidAdInfo adInfo) {
+            public void onImpression(@NonNull CQYzNativeAdView view, @NonNull CQYzAdInfo adInfo) {
                 if (consoleCallback != null) {
                     consoleCallback.printMsg("信息流曝光成功");
                 }
             }
 
             @Override
-            public void onNativeAdClick(@NonNull AdbidNativeAdView view,
-                                        @NonNull AdbidAdInfo adInfo) {
+            public void onNativeAdClick(@NonNull CQYzNativeAdView view,
+                                        @NonNull CQYzAdInfo adInfo) {
                 if (consoleCallback != null) {
                     consoleCallback.printMsg("信息流被点击");
                 }
             }
 
             @Override
-            public void onAdClose(@Nullable AdbidNativeAdView view) {
+            public void onAdClose(@Nullable CQYzNativeAdView view) {
                 int adapterPosition = holder.getBindingAdapterPosition();
                 if (adapterPosition != RecyclerView.NO_POSITION) {
                     list.get(adapterPosition).nativeAd = null;
@@ -258,7 +258,7 @@ public class NativeDrawPagerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 ToastHub.show(context, "激励广告开始加载...");
                 AdbidAdLoad.getInstance().loadReward(true);
             } catch (Exception e) {
-                Log.e("AdbidSdkDemo", "load reward failed", e);
+                Log.e("CQYzSdkDemo", "load reward failed", e);
                 ToastHub.show(v.getContext(), "请先在首页完成广告初始化");
             }
         });
@@ -309,7 +309,7 @@ public class NativeDrawPagerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         holder.sixInfo.setVisibility(GONE);
     }
 
-    private void bindAdMeta(@NonNull NativeAdHolder holder, @NonNull AdbidNativeAd nativeAd) {
+    private void bindAdMeta(@NonNull NativeAdHolder holder, @NonNull CQYzNativeAd nativeAd) {
         String descriptionText = nativeAd.getDescriptionText();
         if (TextUtils.isEmpty(descriptionText)) {
             holder.descTv.setVisibility(GONE);
@@ -338,7 +338,7 @@ public class NativeDrawPagerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         bindSixElements(holder, nativeAd.getNativeAppInfo());
     }
 
-    private void bindAdIcon(@NonNull NativeAdHolder holder, @NonNull AdbidNativeAd nativeAd) {
+    private void bindAdIcon(@NonNull NativeAdHolder holder, @NonNull CQYzNativeAd nativeAd) {
         holder.iconContainer.removeAllViews();
         View adIconView = nativeAd.getIconView();
         if (adIconView != null) {
@@ -361,7 +361,7 @@ public class NativeDrawPagerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         holder.iconContainer.setVisibility(VISIBLE);
     }
 
-    private void bindSixElements(@NonNull NativeAdHolder holder, @Nullable AdbidNativeAppInfo appInfo) {
+    private void bindSixElements(@NonNull NativeAdHolder holder, @Nullable CQYzNativeAppInfo appInfo) {
         if (appInfo == null) {
             holder.sixInfo.setVisibility(GONE);
             return;
@@ -458,7 +458,7 @@ public class NativeDrawPagerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     static class NativeAdHolder extends RecyclerView.ViewHolder {
-        AdbidNativeAdView nativeLayout;
+        CQYzNativeAdView nativeLayout;
         TextView titleTv;
         TextView authorTv;
         TextView timeTv;

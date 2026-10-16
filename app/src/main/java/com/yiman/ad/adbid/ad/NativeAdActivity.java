@@ -17,18 +17,18 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.common.extension.ling.media.AdBidLossInfo;
-import com.common.extension.ling.media.AdBidPlatform;
-import com.common.extension.ling.media.AdMaterialType;
-import com.common.extension.ling.media.AdbidAdInfo;
-import com.common.extension.ling.media.AdbidError;
-import com.common.extension.ling.media.ad.AdbidNativeLoader;
-import com.common.extension.ling.media.nativeAd.AdbidAppDownLoadListener;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAd;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAdView;
-import com.common.extension.ling.media.nativeAd.AdbidNativeEventListener;
-import com.common.extension.ling.media.nativeAd.AdbidNativeVideoListener;
-import com.common.extension.ling.media.nativeOverseas.NativeAdbidLoadListener;
+import com.cqyh.cqadsdk.yz.media.CQYzLossInfo;
+import com.cqyh.cqadsdk.yz.media.CQYzPlatform;
+import com.cqyh.cqadsdk.yz.media.AdMaterialType;
+import com.cqyh.cqadsdk.yz.media.CQYzAdInfo;
+import com.cqyh.cqadsdk.yz.media.CQYzError;
+import com.cqyh.cqadsdk.yz.media.ad.CQYzNativeLoader;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzAppDownLoadListener;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeAd;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeAdView;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeEventListener;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeVideoListener;
+import com.cqyh.cqadsdk.yz.media.nativeOverseas.CQYzNativeLoadListener;
 import com.yiman.ad.adbid.AdConfig;
 import com.yiman.ad.BaseActivity;
 import com.yiman.ad.adbid.AdbidAdLoad;
@@ -55,10 +55,10 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
     private final List<PlacementOption> availablePlacementOptions = new ArrayList<>();
     private PlacementOption drawPlacementOption;
     private PlacementOption bottomPlacementOption;
-    private AdbidNativeLoader mATNative;
-    private AdbidNativeAd mNativeAd;
+    private CQYzNativeLoader mATNative;
+    private CQYzNativeAd mNativeAd;
 
-    private AdbidNativeAdView mATNativeView;
+    private CQYzNativeAdView mATNativeView;
     private TextView mTVLoadAdBtn;
     private TextView mTVIsAdReadyBtn;
     private TextView mTVShowAdBtn;
@@ -131,10 +131,10 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
 
     int size=0;
     private void initATNativeAd(String placementId) {
-        mATNative = new AdbidNativeLoader(this, placementId,new NativeAdbidLoadListener() {
+        mATNative = new CQYzNativeLoader(this, placementId,new CQYzNativeLoadListener() {
 
-            @Override public void onNativeAdLoaded(@NonNull AdbidNativeAd nativeAd) {
-                AdbidAdInfo adinfo = nativeAd.getAdbidAdInfo();
+            @Override public void onNativeAdLoaded(@NonNull CQYzNativeAd nativeAd) {
+                CQYzAdInfo adinfo = nativeAd.getAdbidAdInfo();
                 String msg = "load success ecpm" + (adinfo == null ? "adinfo null" :
                         adinfo.getPrice());
                 showToast(msg);
@@ -143,12 +143,12 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
                 if (size % 2 > 0)
                     mATNative.winNotice(1000);
                 else
-                    mATNative.lossNotice(new AdBidLossInfo(AdBidPlatform.GDT,5000,"this is test " +
+                    mATNative.lossNotice(new CQYzLossInfo(CQYzPlatform.GDT,5000,"this is test " +
                             "ad"));
                 size++;
             }
 
-            @Override public void onNativeAdLoadFail(@NonNull AdbidError adError) {
+            @Override public void onNativeAdLoadFail(@NonNull CQYzError adError) {
                 showToast("load fail");
                 logConsole.error("[" + currentPlacementForLog() + "] 信息流加载失败: " +
                         adError.getMessage());
@@ -193,7 +193,7 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
             logConsole.warning("[" + currentPlacementForLog() + "] 当前无可用广告位，无法展示信息流广告");
             return;
         }
-        AdbidNativeAd nativeAd = mATNative.getNativeAd();
+        CQYzNativeAd nativeAd = mATNative.getNativeAd();
         if (nativeAd != null) {
             logConsole.info("[" + currentPlacementForLog() + "] 开始展示自渲染信息流");
             if (mNativeAd != null) {
@@ -201,9 +201,9 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
             }
             mNativeAd = nativeAd;
             //设置事件监听
-            mNativeAd.setEventListener(new AdbidNativeEventListener() {
-                @Override public void onImpression(@NonNull AdbidNativeAdView view,
-                                                   @NonNull AdbidAdInfo adInfo) {
+            mNativeAd.setEventListener(new CQYzNativeEventListener() {
+                @Override public void onImpression(@NonNull CQYzNativeAdView view,
+                                                   @NonNull CQYzAdInfo adInfo) {
                     videoControl.setVisibility(
                             nativeAd.getAdMaterialType() == AdMaterialType.VIDEO ? View.VISIBLE :
                                     View.INVISIBLE);
@@ -211,13 +211,13 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
                     logConsole.success("[" + currentPlacementForLog() + "] 信息流曝光成功");
                 }
 
-                @Override public void onNativeAdClick(@NonNull AdbidNativeAdView view,
-                                                      @NonNull AdbidAdInfo adInfo) {
+                @Override public void onNativeAdClick(@NonNull CQYzNativeAdView view,
+                                                      @NonNull CQYzAdInfo adInfo) {
                     showToast("ad click");
                     logConsole.info("[" + currentPlacementForLog() + "] 信息流被点击");
                 }
 
-                @Override public void onAdClose(@Nullable AdbidNativeAdView view) {
+                @Override public void onAdClose(@Nullable CQYzNativeAdView view) {
                     showToast("ad close");
                     logConsole.warning("[" + currentPlacementForLog() + "] 信息流已关闭");
                 }
@@ -349,7 +349,7 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
         }
         ViewGroup panelGroup = (ViewGroup) mPanel;
         panelGroup.removeAllViews();
-        AdbidNativeAdView nativeAdView = new AdbidNativeAdView(this);
+        CQYzNativeAdView nativeAdView = new CQYzNativeAdView(this);
         nativeAdView.setId(R.id.native_ad_view);
         nativeAdView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -362,7 +362,7 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
 
     private boolean isMute = true;
 
-    private void initAdNativeListener(AdbidNativeAd mNativeAd) {
+    private void initAdNativeListener(CQYzNativeAd mNativeAd) {
         videoStart.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) {
                 logConsole.info("点击视频播放");
@@ -376,7 +376,7 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
             }
         });
 
-        /*mNativeAd.setCustomDownloadConfirmListener(new AdbidCustomDownloadConfirmListener() {
+        /*mNativeAd.setCustomDownloadConfirmListener(new CQYzCustomDownloadConfirmListener() {
             @Override public void onDownloadConfirm(Context context, Bundle bundle,
                                                     AdbidDownloadConfirmCallback callback) {
                 new AlertDialog.Builder(context)
@@ -411,7 +411,7 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
                 logConsole.info("视频静音切换: " + (isMute ? "静音" : "有声"));
             }
         });
-        mNativeAd.setVideoListener(new AdbidNativeVideoListener() {
+        mNativeAd.setVideoListener(new CQYzNativeVideoListener() {
             @Override public void onVideoStart() {
                 logText("video status: start");
             }
@@ -428,7 +428,7 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
                 logText("video status: end");
             }
 
-            @Override public void onVideoError(AdbidError var1) {
+            @Override public void onVideoError(CQYzError var1) {
                 logText("video status: error " + var1.getMessage());
             }
 
@@ -440,7 +440,7 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
                 progressText("video progress：" + progress + "%");
             }
         });
-        mNativeAd.setDownLoadListener(new AdbidAppDownLoadListener() {
+        mNativeAd.setDownLoadListener(new CQYzAppDownLoadListener() {
             @Override public void onDownloadPaused(int progress) {
                 logText("download status: pause");
             }
@@ -461,7 +461,7 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
                 logText("download status: resume");
             }
 
-            @Override public void onDownloadFailed(AdbidError error) {
+            @Override public void onDownloadFailed(CQYzError error) {
                 logText("download status: fail");
             }
 

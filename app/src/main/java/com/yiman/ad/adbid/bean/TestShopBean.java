@@ -1,6 +1,6 @@
 package com.yiman.ad.adbid.bean;
 
-import com.common.extension.ling.media.nativeAd.AdbidNativeAd;
+import com.cqyh.cqadsdk.yz.media.nativeAd.CQYzNativeAd;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class TestShopBean {
     public Integer zan;
 
     public int itemType = 0;
-    public AdbidNativeAd nativeAd;
+    public CQYzNativeAd nativeAd;
     public int pos = 0;
 
     public int customType = 0;
