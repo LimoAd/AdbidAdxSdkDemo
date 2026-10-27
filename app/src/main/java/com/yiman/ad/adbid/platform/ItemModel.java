@@ -1,6 +1,6 @@
 package com.yiman.ad.adbid.platform;
 
-import com.common.extension.ling.media.AdBidPlatform;
+import com.jtmax.ml.media.AdBidPlatform;
 
 public class ItemModel {
     private String name;

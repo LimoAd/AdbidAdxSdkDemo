@@ -2,9 +2,9 @@ package com.yiman.ad;
 
 import android.text.TextUtils;
 
-import com.common.extension.ling.media.Logger;
-import com.common.extension.ling.sdk.AdbidSdk;
-import com.common.extension.ling.sdk.AdbidSdkInfoCallback;
+import com.jtmax.ml.media.Logger;
+import com.jtmax.ml.sdk.AdbidSdk;
+import com.jtmax.ml.sdk.AdbidSdkInfoCallback;
 import com.yiman.ad.adbid.AdConfig;
 
 import org.json.JSONObject;

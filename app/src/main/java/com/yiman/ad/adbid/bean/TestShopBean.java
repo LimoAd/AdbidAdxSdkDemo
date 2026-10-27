@@ -1,6 +1,6 @@
 package com.yiman.ad.adbid.bean;
 
-import com.common.extension.ling.media.nativeAd.AdbidNativeAd;
+import com.jtmax.ml.media.nativeAd.AdbidNativeAd;
 
 import java.util.List;
 

@@ -16,11 +16,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.common.extension.ling.media.AdMaterialType;
-import com.common.extension.ling.media.Logger;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAd;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAdView;
-import com.common.extension.ling.media.nativeAd.AdbidNativeAppInfo;
+import com.jtmax.ml.media.AdMaterialType;
+import com.jtmax.ml.media.Logger;
+import com.jtmax.ml.media.nativeAd.AdbidNativeAd;
+import com.jtmax.ml.media.nativeAd.AdbidNativeAdView;
+import com.jtmax.ml.media.nativeAd.AdbidNativeAppInfo;
 import com.bumptech.glide.Glide;
 import com.yiman.ad.adbid.R;
 

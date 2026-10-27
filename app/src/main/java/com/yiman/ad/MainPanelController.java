@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.common.extension.ling.sdk.AdbidSdkConfiguration;
+import com.jtmax.ml.sdk.AdbidSdkConfiguration;
 import com.yiman.ad.adbid.AdConfig;
 import com.yiman.ad.adbid.AdbidAdLoad;
 import com.yiman.ad.adbid.R;

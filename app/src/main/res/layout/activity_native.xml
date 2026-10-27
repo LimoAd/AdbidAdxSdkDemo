@@ -126,7 +126,7 @@
                     android:gravity="center"
                     android:visibility="invisible">
 
-                    <com.common.extension.ling.media.nativeAd.AdbidNativeAdView
+                    <com.jtmax.ml.media.nativeAd.AdbidNativeAdView
                         android:id="@+id/native_ad_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
                         <include
                             android:id="@+id/self_render_view"
                             layout="@layout/layout_native_self" />
-                    </com.common.extension.ling.media.nativeAd.AdbidNativeAdView>
+                    </com.jtmax.ml.media.nativeAd.AdbidNativeAdView>
                 </LinearLayout>
 
                 <LinearLayout
