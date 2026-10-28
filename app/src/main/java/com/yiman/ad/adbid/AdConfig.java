@@ -24,9 +24,15 @@ import java.util.Map;
 
 
     static {
+        //release
         configMap.put("10028",
                 new AdConfig("10028", "", "", "",
                         "MTc3OTg1ODEyOTc5Nw==", ""));
+      /*
+      //test
+      configMap.put("10028",
+                new AdConfig("10028", "", "", "",
+                        "MTc4MDQ1NzE1MDk3MQ==", ""));*/
     }
 
     public static IAdLoad getAdLoad(@NonNull Context context) {

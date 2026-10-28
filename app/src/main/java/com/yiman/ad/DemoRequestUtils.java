@@ -25,7 +25,7 @@ import java.util.Map;
 public class DemoRequestUtils {
 
     private static final String TAG ="adbidSdk";
-    protected static final String SERVER_BIDDING_URL = "http://pre-ads-bid.leadmoad.com/api/adx/bidding";
+    protected static final String SERVER_BIDDING_URL = "https://ads-bid.leadmoad.com/api/adx/bidding";
     private static final String POST_DATA = "{\"id\":\"f11a0d31-6f69-45b7-8a60-448ddad5702b\",\"timestamp\":1778295909173,\"device\":{\"device_type\":1,\"android_id\":\"567834249b14e285\",\"oaid\":\"f5cd4f70c1319b5a\",\"mac\":\"\",\"bootMark\":\"de992407-551e-429f-896e-85502\",\"updateMark\":\"1778295903.700856078\",\"language\":\"zh\",\"manu\":\"Xiaomi\",\"brand\":\"Redmi\",\"model\":\"22041211AC\",\"width\":1440,\"height\":3036,\"os_type\":1,\"os_version\":\"13\",\"user_agent\":\"Mozilla\\/5.0 (Linux; Android 13; 22041211AC Build\\/TP1A.220624.014; wv) AppleWebKit\\/537.36 (KHTML, like Gecko) Version\\/4.0 Chrome\\/147.0.7727.55 Mobile Safari\\/537.36\",\"density\":3.7375,\"orientation\":2,\"imsi\":\"\",\"client_time\":\"2026-05-09 11:05:09.166+0800\",\"net_work\":{\"ip\":\"124.127.72.83\",\"ip_v6\":\"{ccmni0=[2408:8509:24c0:70da:18ad:c220:18c0:dedc], ccmni1=[2408:8409:2521:3de:18ad:c220:1e21:e7ac]}\",\"isp_type\":46001,\"network_type\":0},\"geo\":{}},\"zone\":{\"id\":\"AD_UNIT_ID\",\"num\":1,\"min_price\":0,\"ad_format\":1,\"supper_twist\":true},\"app\":{\"app_id\":\"10005\",\"bundle\":\"com.adbid.sdk.demo\",\"version\":\"2.1.0.11\",\"app_name\":\"%E9%A2%86%E6%91%A9%E5%B9%BF%E5%91%8A%E6%B5%8B%E8%AF%95\"},\"ext\":{\"sdk_info\":\"SDK_INFO\"}}";
 
     public void requestBiddingToken(String posId, RequestCallBack callBack) {
