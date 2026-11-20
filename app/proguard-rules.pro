@@ -20,3 +20,30 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+# Glide 4.x
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep class * extends com.bumptech.glide.module.AppGlideModule {
+ <init>(...);
+}
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+-keep class com.bumptech.glide.load.data.ParcelableInputStream
+
+-dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
+
+# 领摩 ADX SDK 通过反射调用 Glide（com.adbid.adx.ad.n0），类名与方法名都不能被混淆
+-keep public class com.bumptech.glide.Glide {
+    public static *** with(...);
+}
+-keep public class com.bumptech.glide.RequestManager {
+    public *** asBitmap();
+}
+-keep public class com.bumptech.glide.RequestBuilder {
+    public *** load(...);
+    public *** listener(...);
+    public *** into(android.widget.ImageView);
+}
+-keep public interface com.bumptech.glide.request.RequestListener { *; }
+

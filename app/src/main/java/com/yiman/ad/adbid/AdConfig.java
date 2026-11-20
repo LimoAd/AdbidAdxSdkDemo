@@ -23,7 +23,7 @@ public class AdConfig {
     private final String bannerUnitId;
     private String nativeUnitId2;
 
-    public static final String DEFAULT_APP_ID = "10007";
+    public static final String DEFAULT_APP_ID = "10001";
     private static final Map<String, AdConfig> configMap = new HashMap<>();
 
     private static boolean s2sBiddingEnabled = false;
@@ -38,6 +38,9 @@ public class AdConfig {
 
 
     static {
+
+        configMap.put("10001", new AdConfig("10001", "MTc5MjM4MjU4NDM0Mw==", "MTc5MjM4MjU5ODQ2OQ==",
+                "MTc5MjM4MjYxOTg0Nw==", "MTc5MjM4MjU2OTA1Mg==", "MTc5MjM4MjYwODQxMg=="));
 
         configMap.put("10005", new AdConfig("10005", "MTc1MzkzMDgyNTk4MA==", "MTc1MzkzMTExNjA4NA==",
                 "MTc1ODcwMDkyNjk1NA==", "MTc1MzkzMDY5NDkyOA==", "MTc1ODc5NjM5NTY4OA=="));

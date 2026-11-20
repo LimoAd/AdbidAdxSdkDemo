@@ -35,6 +35,7 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled true
             // 混淆配置文件的位置
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -64,7 +65,7 @@ dependencies {
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
 
     //必选：领摩加载库
-    implementation(files("libs/adbid_sdk_2.1.0.26_1111_1139.aar"))
+    implementation(files("libs/adbid_sdk_2.1.0.26_1120_1822.aar"))
 
 
     //选择性接入(强烈建议)：微信小程序,有利于提高收益
