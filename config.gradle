@@ -1,6 +1,6 @@
 ext {
     android = [compileSdkVersion: 33,
-               minSdkVersion    : 21,
+               minSdkVersion    : 24,
                targetSdkVersion : 31,
                junitVersion     : '4.12',
                kotlin_version   : '1.4.21',
